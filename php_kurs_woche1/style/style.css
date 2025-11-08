@@ -1,0 +1,15 @@
+/* Minimal, helles Layout für Kursdateien */
+:root{--bg:#f6f8fb;--fg:#111;--muted:#6b7280;--primary:#2563eb;--card:#fff;--border:#e5e7eb;--good:#059669;--ok:#8b5cf6;--bad:#dc2626;}
+*{box-sizing:border-box}html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial}
+header{background:linear-gradient(180deg,#fff,rgba(255,255,255,.85));border-bottom:1px solid var(--border);padding:18px}
+h1,h2,h3{margin:0 0 12px}
+.container{max-width:900px;margin:24px auto;padding:0 16px}
+p.meta{color:var(--muted);font-size:.9rem;margin:.25rem 0 1rem}
+.post{background:var(--card);border:1px solid var(--border);padding:16px;border-radius:12px;box-shadow:0 3px 12px rgba(0,0,0,.05);margin-bottom:16px}
+.card{background:var(--card);border:1px solid var(--border);padding:16px;border-radius:12px;box-shadow:0 1px 8px rgba(0,0,0,.05);}
+label{display:block;margin:8px 0 12px}
+input,textarea,select,button{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:10px}
+button{background:var(--primary);color:#fff;border:none;font-weight:600;cursor:pointer;transition:transform .02s ease}
+button:hover{transform:translateY(-1px)}
+.alert{background:#fff3cd;border:1px solid #ffe69c;padding:10px;border-radius:10px;margin-bottom:12px}
+.good{color:var(--good)}.ok{color:var(--ok)}.bad{color:var(--bad)}

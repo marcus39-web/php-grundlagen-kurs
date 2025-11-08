@@ -1,0 +1,5 @@
+-- Übung 1 – SQL‑Grundlagen
+-- 1) Erstelle DB 'notizmanager' (falls nicht vorhanden).
+-- 2) Lege Tabelle 'notes' an (id, title, content, created_at).
+-- 3) Füge zwei Testdatensätze ein.
+-- 4) Selektiere alle Notizen, sortiert nach Datum (neueste zuerst).
