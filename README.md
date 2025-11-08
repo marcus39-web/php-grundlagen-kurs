@@ -31,6 +31,7 @@ php_kurs_woche2/
 php_kurs_woche3/
   ├── PHP_Grundlagen_Woche3_Teilnehmerversion.md
   └── materialien
+Github_Anleitung_Teilnehmer.md
 README.md
 ```
 
