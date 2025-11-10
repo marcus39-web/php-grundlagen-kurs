@@ -1,5 +1,10 @@
 <?php
 declare(strict_types=1);
+$name = "Marcus";
+$age = 55;
+$city = "Legefeld";
+$birthYear = date("Y") - $age;
+$gebJahr = $aktJahr - $age;
 /**
  * Aufgabe:
  * 1) Lege Variablen für name, alter, stadt an.
@@ -18,7 +23,8 @@ declare(strict_types=1);
 <body>
   <header><h1>Übung 2 – Personeninfo</h1></header>
   <main class="container">
-    <!-- TODO -->
+    <p>Hallo <?= htmlspecialchars($name); ?>, du bist <?= $age; ?> Jahre alt und wohnst in <?= htmlspecialchars($city); ?>.</p>
+    <p>Du wurdest im Jahr <?= $birthYear; ?> geboren.</p>
   </main>
 </body>
 </html>
