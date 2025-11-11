@@ -3,6 +3,7 @@ declare(strict_types=1);
 $name = "Marcus";
 $age = 55;
 $city = "Legefeld";
+
 $birthYear = date("Y") - $age;
 $gebJahr = $aktJahr - $age;
 /**
