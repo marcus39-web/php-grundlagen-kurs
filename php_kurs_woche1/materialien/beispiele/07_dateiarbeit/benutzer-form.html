@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Benutzer anlegen</title>
+  <link rel="stylesheet" href="../../style/style.css">
+</head>
+<body>
+  <header>
+    <h1>Benutzer anlegen</h1>
+  </header>
+  <main class="container">
+    <form action="benutzer.php" method="post">
+
+      <label>Vorname:
+        <input type="text" name="fname">
+      </label>
+
+      <label>Nachname:
+        <input type="text" name="lname">
+      </label>
+
+      <label>E-Mail-Adresse:
+        <input type="email" name="email">
+      </label>
+
+      <label>Nachricht:
+        <textarea name="msg" cols="30" rows="10"></textarea>
+      </label>
+
+      <div style="margin-bottom:1rem;"><button type="submit">Senden</button></div>
+      <div><button type="reset">Zurücksetzen</button></div>
+
+    </form>
+  </main>
+</body>
+</html>
