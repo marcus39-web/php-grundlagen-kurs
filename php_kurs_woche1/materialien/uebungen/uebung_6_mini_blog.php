@@ -11,8 +11,6 @@ include_once 'artikel.inc.php';
  * 3) Bonus: Eigene Formatierungsfunktion verwenden.
  */
 
-// Dies ist ein Testkommentar
-
 /**
  * Formatiert einen Blog-Post als HTML
  * @param array $post Der Blog-Post mit titel, autor, datum, inhalt
