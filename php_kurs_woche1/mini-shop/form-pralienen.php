@@ -18,7 +18,7 @@ include_once 'artikel.inc.php';
     <h1>Bestellformular für Pralinen</h1>
   </header>
   <main class="container">
-    <p>Tragen Sie bitte die gewünschte Menge Pralinen ein:</p>
+    <p>Hallo gib bitte die gewünschte Menge Pralinen ein:</p>
 
     <form action="warenkorb.php" method="post">
       <table>

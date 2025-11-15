@@ -1,4 +1,10 @@
-<?php session_start(); ?>
+<?php
+declare(strict_types=1);
+session_start();
+error_reporting(E_ALL);
+ini_set('display_errors',true);
+include_once 'artikel.inc.php';
+?>
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -9,7 +15,7 @@
 </head>
 <body>
   <header>
-    <h1>Start einer Session</h1>
+    <h1>Starte eine Session</h1>
   </header>
   <main class="container">
     <p>Die Session wurde gestartet.</p>
