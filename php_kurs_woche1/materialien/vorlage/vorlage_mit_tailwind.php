@@ -11,7 +11,7 @@ ini_set('display_errors',true);
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Deiteiname</title>
-  <link rel="stylesheet" href="../tailwind.css">
+  <link rel="stylesheet" href="../../../tailwind.css">
 </head>
 <body class="bg-gray-100 min-h-screen flex flex-col">
   <header class="bg-blue-600 text-white shadow-lg">
