@@ -6,6 +6,38 @@ declare(strict_types=1);
  * 2) Erzeuge mehrere Objekte und gib sie in HTML aus.
  * 3) Optional: Lese Daten aus notes.json und wandle sie in Objekte um.
  */
+class Note {
+  public string $title;
+  public string $content;
+
+  public function __construct(string $title, string $content) {
+    $this->title = $title;
+    $this->content = $content;
+  }
+}
+
+// Notizen aus notes.json laden, falls vorhanden
+$notes = [];
+$jsonFile = __DIR__ . '/notes.json';
+if (file_exists($jsonFile)) {
+  $jsonData = file_get_contents($jsonFile);
+  $data = json_decode($jsonData, true);
+  if (is_array($data)) {
+    foreach ($data as $item) {
+      if (isset($item['title'], $item['content'])) {
+        $notes[] = new Note($item['title'], $item['content']);
+      }
+    }
+  }
+}
+// Fallback: Beispielnotizen, falls keine aus JSON geladen wurden
+if (empty($notes)) {
+  $notes = [
+    new Note('Einkaufsliste', 'Milch, Brot, Butter'),
+    new Note('ToDo', 'PHP-Übung abschließen'),
+    new Note('Idee', 'Notiz-App mit PHP bauen')
+  ];
+}
 ?>
 <!doctype html>
 <html lang="de">
@@ -18,7 +50,17 @@ declare(strict_types=1);
 <body>
   <header><h1>Übung 4 – Note-Klasse</h1></header>
   <main class="container">
-    <!-- TODO -->
+    <section>
+      <h2>Notizen</h2>
+      <ul>
+        <?php foreach ($notes as $note): ?>
+          <li>
+            <strong><?= htmlspecialchars($note->title) ?></strong><br>
+            <span><?= nl2br(htmlspecialchars($note->content)) ?></span>
+          </li>
+        <?php endforeach; ?>
+      </ul>
+    </section>
   </main>
 </body>
 </html>
