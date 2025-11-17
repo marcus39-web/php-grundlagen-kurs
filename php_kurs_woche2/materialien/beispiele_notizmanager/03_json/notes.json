@@ -1,1 +1,6 @@
-[]
+[
+    {
+        "title": "Test",
+        "content": "Hallo JSON!"
+    }
+]

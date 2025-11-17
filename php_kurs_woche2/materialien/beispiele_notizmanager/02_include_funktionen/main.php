@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
-
+require_once __DIR__ . '/inc/tools.php';
+$result = preisMitMwst(100, 0.19, 10);
 ?>
 <!doctype html>
 <html lang="de">
