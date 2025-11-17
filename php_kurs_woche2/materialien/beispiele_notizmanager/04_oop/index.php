@@ -4,7 +4,7 @@ require_once __DIR__ . '/class/Note.php';
 error_reporting(E_ALL);
 ini_set('display_errors', true);
 $notes = [
-  new Note( 'Titel 1', 'Erster Eintrag', 'OOP macht PHP strukturierter' ),
+  new Note('Erster Eintrag', 'OOP macht PHP strukturierter' ),
   new Note('Zweiter Eintrag', 'Klassen kapseln Daten & Verhalten')
 ]
 
