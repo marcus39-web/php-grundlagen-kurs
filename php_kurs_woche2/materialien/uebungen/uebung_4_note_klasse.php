@@ -11,7 +11,7 @@ class Note {
   public string $content;
 
   public function __construct(string $title, string $content) {
-    $this->title = $title;
+    return $this->title = $title;
     $this->content = $content;
   }
 }

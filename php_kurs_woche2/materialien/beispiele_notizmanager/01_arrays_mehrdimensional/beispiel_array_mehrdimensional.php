@@ -1,13 +1,14 @@
 <?php
 declare(strict_types=1);
-ini_set('display_erros', true);
+error_reporting(E_ALL);
+ini_set('display_errors', true);
 $inventory = [
- [ 'name' => 'Ruckssack', 'preis' => 79.90, 'bestand' => 12 ],
- [ 'name' => 'Kletterseil', 'preis' => 129.00, 'bestand' => 5 ],
- [ 'name' => 'Karabiener', 'preis' => 8.50, 'bestand' => 40 ],
+  ['name' => 'Rucksack', 'preis' => 79.90, 'bestand' => 12],
+  ['name' => 'Kletterseil', 'preis' => 129.00, 'bestand' => 5],
+  ['name' => 'Karabiner', 'preis' => 8.50, 'bestand' => 40],
 ];
 $total = 0.0;
-foreach ($inventory as $i) {
+foreach( $inventory as $i ) {
   $total += $i['preis'] * $i['bestand'];
 }
 ?>
@@ -25,11 +26,11 @@ foreach ($inventory as $i) {
   <div class="card">
     <h2>Lager</h2>
     <ul>
-      <?php foreach ($inventory as $i): ?>
+      <?php foreach( $inventory as $i ): ?>
         <li><?= htmlspecialchars($i['name']) ?> - <?= number_format($i['preis'], 2, ',', '.') ?> € x <?= (int)$i['bestand'] ?></li>
-        <?php endforeach ?>
+      <?php endforeach; ?>
     </ul>
-    <p><strong>Gesamtwert:</strong> <?= number_format($total, 2, ',', '.') ?> €</p>
+    <p><strong>Gesamtwert:</strong> <?= number_format( $total, 2, ',', '.') ?> €</p>
   </div>
 </main>
 </body>
