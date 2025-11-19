@@ -1,4 +1,8 @@
 <?php
+declare(strict_types=1);
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+?>
 // Notiz anhand des Index aus notes.json löschen
 $notesFile = __DIR__ . '/data/notes.json';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idx'])) {

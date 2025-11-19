@@ -1,6 +1,9 @@
 <?php
-require_once __DIR__ . '/../inc/notes_functions.php';
+declare(strict_types=1);
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 
+require_once __DIR__ . '/../inc/tools.php';
 $notesFile = __DIR__ . '/../data/notes.json';
 $notes = load_notes($notesFile);
 ?><!doctype html>

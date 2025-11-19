@@ -1,5 +1,8 @@
-<?php
+<?php 
 declare(strict_types=1);
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
 /**
  * Aufgabe:
  * 0) Einer von Euch legt ein öffentliches Git-Repo an von wo aus Ihr alle pushen und pullen könnt (optional aber hilfreich)
@@ -12,10 +15,10 @@ declare(strict_types=1);
  *    - Formular zum Löschen der entsprechenden Notiz (<input type="hidden">)
  * 5) inc/tools.php
  *    - Funktionen zum Laden, Speichern und Laden der Notizen
- * 6) add.php
- *    - Funktionalität zum Hinzufügen neuer Notizen
- * 7) delete.php
- *    - Funtionalität zum Löschen einer Notiz
+ * 6) inc/tools.php
+ *    - Funktionen zum Laden, Speichern und Laden der Notizen
+ * 7) inc/tools.php
+ *    - Funktionen zum Laden, Speichern und Laden der Notizen
  * 8) class/Note.php
  *    - Klasse für Notizen
  */

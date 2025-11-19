@@ -1,5 +1,8 @@
 <?php
-// Hilfsfunktionen für Notizen
+declare(strict_types=1);
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
 require_once __DIR__ . '/../class/Note.php';
 
 function load_notes(string $file): array {
