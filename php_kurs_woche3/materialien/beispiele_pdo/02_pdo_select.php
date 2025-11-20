@@ -1,6 +1,8 @@
 <?php
-
 declare(strict_types=1);
+require_once __DIR__ . '/inc/pdo-connect.php';
+
+$rows = $pdo->query('SELECT id, title, created_at FROM notes ORDER BY id DESC')->fetchAll();
 
 ?>
 <!doctype html>
@@ -10,7 +12,7 @@ declare(strict_types=1);
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>PDO SELECT</title>
-  <link rel="stylesheet" href="../projekt_notizmanager_db/style/style.css">
+  <link rel="stylesheet" href="../../../php_kurs_woche2/materialien/style/style.css">
 </head>
 
 <body>
@@ -25,7 +27,13 @@ declare(strict_types=1);
         </tr>
       </thead>
       <tbody>
-
+        <?php foreach($rows as $r): ?>
+          <tr>
+            <td><?= (int)$r->id ?></td>
+            <td><?= htmlspecialchars($r->title) ?></td>
+            <td><?= htmlspecialchars($r->created_at) ?></td>
+          </tr>
+        <?php endforeach; ?>
       </tbody>
     </table>
   </main>
