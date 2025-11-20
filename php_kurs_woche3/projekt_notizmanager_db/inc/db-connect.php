@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-require_once  __DIR__ .   '/ENV.php';
+require_once  __DIR__ .   '/bootstrap.php';
 
 try {
 $dsn = sprintf(
     'mysql:host=%s;dbname=%s;charset=%s',
     $_ENV['DB_HOST'],
     $_ENV['DB_NAME'],
-    $_ENV['DB_CharSET']
+    $_ENV['DB_CHARSET']
 
 );
  $pdo = new PDO(
