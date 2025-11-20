@@ -1,5 +1,8 @@
 <?php
-declare(strict_types=1);
+    declare(strict_types=1);
+    //! die folgendern 2 Zeilen in der Produktiv-Variante löschen!
+    error_reporting(E_ALL);
+    ini_set('display_errors', '1');
  
 function getAllNotes(PDO $pdo):array {
     $sql = 'SELECT n.id, n.title, n.content, n.created_at, c.name AS category
@@ -30,4 +33,8 @@ function findNote(PDO $pdo, int $id): ?object {
 function updateNote(PDO $pdo, int $id, string $title, string $content, ?int $categoryId = null): void {
     $stmt = $pdo->prepare('UPDATE notes SET title=:t, content=:c, category_id=:cat WHERE id=:id');
     $stmt->execute([':t' => $title, ':c' => $content, ':cat' => $categoryId, ':id' => $id]);
+}
+function deletNode(PDO $pdo, int $id): void {
+    $stmt = $pdo->prepare('DELETE FROM notes WHERE id=:id');
+    $stmt->execute([':id' => $id]);
 }

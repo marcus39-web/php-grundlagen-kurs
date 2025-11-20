@@ -65,6 +65,9 @@
                             <td><?= safe($n->created_at) ?></td>
                             <td>
                                 <a href="edit.php?id=<?= (int)$n->id ?>" class="button">Bearbeiten</a>
+                                <form action="delete.php" style="display:inline;" method="post"></form>
+                                    <input type="hidden" name="id" value="<?= (int)$n->id ?>">
+                                    <button type="submit" class="text-danger');">Löschen</button>
                             </td>
                         </tr>
                     <?php endforeach; ?>
