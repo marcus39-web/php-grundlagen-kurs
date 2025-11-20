@@ -34,7 +34,7 @@
         <section class="card">
             <h2>Neue Notiz</h2>
             <form action="add.php" method="post">
-                <label>Titel <input type="text" name="titel" required></label>
+                <label>Titel <input type="text" name="title" required></label>
                 <label>Inhalt <textarea name="content" rows="10" required></textarea></label>
                 <lable>Kategorie
                     <select name="category_id">

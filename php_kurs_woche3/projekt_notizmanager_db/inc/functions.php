@@ -9,8 +9,13 @@ function getAllNotes(PDO $pdo):array {
         ORDER BY n.id DESC';
 
         return $pdo->query($sql)->fetchAll();
-    }
+}
     
-    function safe(string $s): string {
-    return htmlspecialchars($s, ENT_QUOTES | ENT_HTML5, 'UTF-8');   
+function safe(string $s): string {
+    return htmlspecialchars($s, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+}
+    
+function addNote(PDO $pdo, string $title, string $content, ?int $categoryID = null): void {
+    $stmt = $pdo->prepare('INSERT INTO notes (title, content, category_id) VALUES (:title, :content, :category_id)');
+    $stmt->execute([':title' => $title, ':content' => $content, ':category_id' => $categoryID ]);
 }
