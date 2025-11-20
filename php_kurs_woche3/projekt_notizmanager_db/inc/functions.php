@@ -8,5 +8,9 @@ function getAllNotes(PDO $pdo):array {
          ON n.category_id = c.id
         ORDER BY n.id DESC';
 
-    return $pdo->query($sql)->fetchAll();
+        return $pdo->query($sql)->fetchAll();
+    }
+    
+    function safe(string $s): string {
+    return htmlspecialchars($s, ENT_QUOTES | ENT_HTML5, 'UTF-8');   
 }

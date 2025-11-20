@@ -33,7 +33,19 @@
     <main class="container">
         <section class="card">
             <h2>Neue Notiz</h2>
-            Formular für neue Notizen
+            <form action="add.php" method="post">
+                <label>Titel <input type="text" name="titel" required></label>
+                <label>Inhalt <textarea name="content" rows="10" required></textarea></label>
+                <lable>Kategorie
+                    <select name="category_id">
+                        <option value="" disabled selected>- keine -</option>
+                        <?php foreach($pdo->query('SELECT id, name FROM categories ORDER BY name') as $category): ?>
+                            <option value="<?= (int)$category->id ?>"><?= safe($category->name) ?></option>
+                            <?php endforeach ?>
+                    </select>
+                </lable>
+                <button type="submit" >Speichern</button>
+            </form>
         </section>
         <section class="card">
             <h2>Einträge</h2>
@@ -48,9 +60,9 @@
                 </thead>
                     <?php foreach ($notes as $n): ?>
                         <tr>
-                            <td><?= $n->title ?></td>
-                            <td><?= $n->category ?></td>
-                            <td><?= $n->created_at ?></td>
+                            <td><?= safe($n->title) ?></td>
+                            <td><?= safe($n->category) ?></td>
+                            <td><?= safe($n->created_at) ?></td>
                             <td>
                                 <a href="edit.php?id=<?= (int)$n->id ?>" class="button">Bearbeiten</a>
                             </td>
