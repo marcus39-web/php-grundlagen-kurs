@@ -1,7 +1,5 @@
 <?php
 declare(strict_types=1);
-require_once __DIR__ . '/../config/config.php';
-require_once __DIR__ .'/inc/pdo-connect.php';
 
 try {
   $pdo = new PDO('mysql:host='. DB_HOST .';dbname=' . DB_NAME . ';charset=utf8mb4',DB_USER , DB_PASSWORD, [
