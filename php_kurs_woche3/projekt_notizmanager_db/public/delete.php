@@ -1,4 +1,3 @@
-
 <?php
 declare(strict_types=1);
 // ! die folgenden 2 Zeilen in der Produktiv-Variante löschen!
