@@ -12,3 +12,4 @@ $id = (int)($_POST['id'] ?? 0);
 if($id) { deleteNote($pdo, $id); }
 
 header('Location: index.php');
+exit;

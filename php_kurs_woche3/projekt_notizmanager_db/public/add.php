@@ -17,3 +17,4 @@ if ($title !== '' && $content !== '') {
 }
 
 header('Location: index.php');
+exit;

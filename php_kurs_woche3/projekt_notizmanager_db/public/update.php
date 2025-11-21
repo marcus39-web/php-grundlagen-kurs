@@ -17,3 +17,4 @@ if ($id && $title !== '' && $content !== '') {
   updateNote($pdo, $id, $title, $content, $catId);
 }
 header('Location: index.php');
+exit;

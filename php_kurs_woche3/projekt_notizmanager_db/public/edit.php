@@ -2,7 +2,7 @@
 include_once 'header.php';
 
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
-$note = $id ? findNote($pdo, $id) : null;
+$note = $id ? getNoteById($pdo, $id) : null;
 if(!$note) { header('Location: index.php'); exit; }
 ?>
 

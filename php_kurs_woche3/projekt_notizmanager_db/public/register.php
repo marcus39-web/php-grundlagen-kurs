@@ -1,4 +1,3 @@
-
 <?php 
 include_once 'header.php'; 
 
@@ -47,6 +46,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <main class="container">
+  <h2>Benutzer-Registrierung</h2>
 
   <?php if($error): ?>
     <p class="alert"><?= safe($error) ?></p>
