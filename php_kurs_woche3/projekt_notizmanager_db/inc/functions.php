@@ -36,3 +36,33 @@ function deleteNote(PDO $pdo, int $id): void {
   $stmt = $pdo->prepare('DELETE FROM notes WHERE id=:id');
   $stmt->execute([':id'=>$id]);
 }
+
+function getAllCategories(PDO $pdo):array {
+  $sql = 'SELECT c.id, c.name
+    FROM categories c
+    ORDER BY c.id DESC';
+  
+  return $pdo->query($sql)->fetchAll();
+}
+
+function addCategory(PDO $pdo, string $name):void {
+  $stmt = $pdo->prepare('INSERT INTO categories(name) VALUES (:n)');
+  $stmt->execute([':n' => $name]);
+}
+
+function findCategory(PDO $pdo, int $id): ?object {
+  $stmt = $pdo->prepare('SELECT * FROM categories WHERE id=:id');
+  $stmt->execute([':id' => $id]);
+  $row = $stmt->fetch();
+  return $row ?: null;
+}
+
+function updateCategory(PDO $pdo, int $id, string $name):void {
+  $stmt = $pdo->prepare('UPDATE categories SET name=:n WHERE id=:id');
+  $stmt->execute([':n'=>$name, ':id'=>$id]);
+}
+
+function deleteCategory(PDO $pdo, int $id): void {
+  $stmt = $pdo->prepare('DELETE FROM categories WHERE id=:id');
+  $stmt->execute([':id'=>$id]);
+}
