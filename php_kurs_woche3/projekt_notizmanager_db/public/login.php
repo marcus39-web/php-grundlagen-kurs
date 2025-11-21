@@ -1,4 +1,11 @@
-<?php 
+<?php
+/**
+ * login.php - Benutzer-Login
+ * 
+ * Zeigt das Login-Formular an und verarbeitet die Anmeldung.
+ * Bei erfolgreicher Authentifizierung wird der User in der Session gespeichert
+ * und zur index.php weitergeleitet.
+ */
 include_once 'header.php'; 
 
 $error = '';

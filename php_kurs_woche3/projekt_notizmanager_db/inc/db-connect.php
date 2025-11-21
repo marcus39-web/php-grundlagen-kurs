@@ -1,4 +1,11 @@
 <?php
+/**
+ * db-connect.php - Datenbankverbindung
+ * 
+ * Stellt eine PDO-Verbindung zur MySQL-Datenbank her.
+ * Verwendet Umgebungsvariablen aus .env-Datei.
+ * Lädt bootstrap.php für Umgebungsvariablen.
+ */
 declare(strict_types=1);
 
 require __DIR__ . '/bootstrap.php';

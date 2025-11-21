@@ -1,4 +1,12 @@
-<?php 
+<?php
+/**
+ * password_change.php - Passwort ändern
+ * 
+ * Ermöglicht eingeloggten Benutzern das Ändern ihres Passworts.
+ * Validiert das aktuelle Passwort vor der Änderung.
+ * Mindestanforderungen: 8 Zeichen für neues Passwort.
+ * Passwörter werden mit password_hash() sicher gehasht.
+ */
 include_once 'header.php';
 
 require_login();
@@ -20,20 +28,22 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
   } elseif($newPassword !== $newPasswordRepeat) {
     $error = 'Die neuen Passwörter stimmen nicht überein!';
   } else {
-    // Prüfen, ob der Benutzername bereits existiert
-    $stmt = $pdo->prepare('SELECT id FROM users WHERE username = ?');
+    // Aktuelles Passwort prüfen
+    $stmt = $pdo->prepare('SELECT id, password_hash FROM users WHERE username = ?');
     $stmt->execute([$currentUser]);
     $user = $stmt->fetch();
 
     if(!$user) {
-      $error = 'Benutzer nicht gefunden (bitte neu einlaggen!)';
+      $error = 'Benutzer nicht gefunden (bitte neu einloggen!)';
+    } elseif(!password_verify($currentPassword, $user->password_hash)) {
+      $error = 'Das aktuelle Passwort ist falsch!';
     } else {
       // neues Passwort setzen
       $newHash = password_hash($newPassword, PASSWORD_DEFAULT);
       $update = $pdo->prepare('UPDATE users SET password_hash = ? WHERE username = ?');
       $update->execute([$newHash, $currentUser]);
       
-      $success = 'Das Passort wurde erfolgreich geändert!';
+      $success = 'Das Passwort wurde erfolgreich geändert!';
       $currentPassword = $newPassword = $newPasswordRepeat = '';
     }
   }

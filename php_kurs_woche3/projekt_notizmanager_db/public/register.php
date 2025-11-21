@@ -1,4 +1,14 @@
 <?php 
+/**
+ * Registrierungsseite für neue Benutzer
+ * 
+ * Funktionen:
+ * - Validierung der Eingaben (Username min. 3 Zeichen, Passwort min. 8 Zeichen)
+ * - Prüfung auf doppelte Benutzernamen
+ * - Passwort-Hashing mit password_hash()
+ * - Automatischer Login nach erfolgreicher Registrierung
+ * - Weiterleitung zur Notizübersicht
+ */
 include_once 'header.php'; 
 
 $error = '';
@@ -66,3 +76,4 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
   </form>
 
 </main>
+<?php include_once 'footer.php'; ?>
