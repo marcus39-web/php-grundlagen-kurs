@@ -1,4 +1,14 @@
 <?php 
+/**
+ * Hauptseite der Notizenverwaltung
+ * 
+ * Funktionen:
+ * - Formular zum Erstellen neuer Notizen mit Titel, Inhalt und Kategorie
+ * - Tabellarische Auflistung aller Notizen des eingeloggten Benutzers
+ * - Admin sieht alle Notizen aller Benutzer mit Username-Spalte
+ * - Bearbeiten- und Löschen-Buttons für jede Notiz
+ * - Kategorien-Dropdown aus der Datenbank
+ */
 include_once 'header.php';
 $notes = getAllNotes($pdo);
 ?>
@@ -27,14 +37,21 @@ $notes = getAllNotes($pdo);
           <tr>
             <th>Titel</th>
             <th>Kategorie</th>
+            <?php if(!empty($_SESSION['user']) && strtolower($_SESSION['user']) === 'admin'): ?>
+              <th>Benutzer</th>
+            <?php endif; ?>
             <th>Datum</th>
             <th>Aktionen</th>
           </tr>
         </thead>
+        <tbody>
           <?php foreach ($notes as $n): ?>
             <tr>
               <td><?= safe($n->title) ?></td>
               <td><?= $n->category ?></td>
+              <?php if(!empty($_SESSION['user']) && strtolower($_SESSION['user']) === 'admin'): ?>
+                <td><?= safe($n->username ?? 'Unbekannt') ?></td>
+              <?php endif; ?>
               <td><?= safe($n->created_at) ?></td>
               <td>
                 <a href="edit.php?id=<?= (int)$n->id ?>" class="button">Bearbeiten</a>
@@ -45,8 +62,6 @@ $notes = getAllNotes($pdo);
               </td>
             </tr>
           <?php endforeach; ?>
-        <tbody>
-
         </tbody>
       </table>
     </section>

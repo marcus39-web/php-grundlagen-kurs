@@ -1,4 +1,11 @@
 <?php
+/**
+ * categ-manager.php - Kategorieverwaltung
+ * 
+ * Zeigt alle Kategorien in einer Tabelle an.
+ * Ermöglicht das Hinzufügen, Bearbeiten und Löschen von Kategorien.
+ * Zugriff für alle eingeloggten Benutzer.
+ */
 include_once 'header.php';
 
 $categs = getAllCategories($pdo);

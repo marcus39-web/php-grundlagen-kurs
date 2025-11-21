@@ -1,4 +1,12 @@
 <?php
+/**
+ * edit.php - Notiz bearbeiten
+ * 
+ * Zeigt das Bearbeitungsformular für eine bestehende Notiz.
+ * Normale User können nur ihre eigenen Notizen bearbeiten,
+ * Admin kann alle Notizen bearbeiten.
+ * Bei ungültiger ID oder fehlenden Rechten: Weiterleitung zu index.php
+ */
 include_once 'header.php';
 
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;

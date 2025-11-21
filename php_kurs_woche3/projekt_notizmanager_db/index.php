@@ -1,3 +1,15 @@
+<?php
+/**
+ * Startseite des Notiz-Manager Projekts (öffentlich zugänglich)
+ * 
+ * Funktionen:
+ * - Willkommensseite mit Navigation zu den Hauptfunktionen
+ * - Links zu Notizen, Kategorien, Login und Registrierung
+ * - Anzeige der aktuell online Benutzer (grüner Punkt)
+ * - Online-Status: Benutzer aktiv in den letzten 5 Minuten
+ * - Admin wird nicht in der Online-Liste angezeigt
+ */
+?>
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -43,6 +55,54 @@
         </ul>
       </nav>
     </section>
+
+    <?php
+    // Datenbankverbindung für Benutzeranzeige
+    require_once __DIR__ . '/inc/db-connect.php';
+    
+    // Nur online Benutzer abrufen (aktiv in den letzten 5 Minuten, außer admin)
+    $stmt = $pdo->query("
+      SELECT 
+        username, 
+        last_activity
+      FROM users 
+      WHERE LOWER(username) != 'admin' 
+        AND last_activity IS NOT NULL 
+        AND last_activity > DATE_SUB(NOW(), INTERVAL 5 MINUTE)
+      ORDER BY username ASC
+    ");
+    $onlineUsers = $stmt->fetchAll();
+    
+    if (count($onlineUsers) > 0):
+    ?>
+    <section class="card" style="margin-top: 2rem;">
+      <h2>🟢 Online Benutzer</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Benutzername</th>
+            <th>Letzte Aktivität</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($onlineUsers as $user): ?>
+            <tr>
+              <td>
+                <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background-color: #22c55e; margin-right: 8px;"></span>
+                <?= htmlspecialchars($user->username, ENT_QUOTES, 'UTF-8') ?>
+              </td>
+              <td><?= htmlspecialchars($user->last_activity, ENT_QUOTES, 'UTF-8') ?></td>
+            </tr>
+          <?php endforeach; ?>
+        </tbody>
+      </table>
+    </section>
+    <?php else: ?>
+    <section class="card" style="margin-top: 2rem;">
+      <h2>🟢 Online Benutzer</h2>
+      <p style="color: #666;"><em>Aktuell sind keine Benutzer online.</em></p>
+    </section>
+    <?php endif; ?>
   </main>
 
   <footer style="text-align: center; padding: 2rem; margin-top: 2rem; color: #666;">
