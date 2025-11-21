@@ -4,7 +4,7 @@ declare(strict_types=1);
 echo '<pre>', var_dump( PDO::getAvailableDrivers() ), '</pre>';
 
 try {
-  $pdo = new PDO('mysql:host=localhost;dbname=notizmanager;charset=utf8mb4','php_user', 'qU2+8i2N&vNy_tA-)PRI]Te>', [
+  $pdo = new PDO('mysql:host=localhost;dbname=notizmanager;charset=utf8mb4','php_user', 'Legefeld', [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
   ]);
