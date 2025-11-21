@@ -5,9 +5,9 @@ namespace App;
 
 use Dotenv\Dotenv;
 
-class ENV {
-    public static function load(string $dbasePath): void {
-        $dotenv = Dotenv::createImmutable($dbasePath);
-        $dotenv->load();
-    }
+class Env {
+  public static function load(string $basePath): void {
+    $dotenv = Dotenv::createImmutable($basePath);
+    $dotenv->load();
+  }
 }

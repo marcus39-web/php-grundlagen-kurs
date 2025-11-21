@@ -1,3 +1,5 @@
 config/
+vendor/
+*/vendor/
 */.env
 .env
