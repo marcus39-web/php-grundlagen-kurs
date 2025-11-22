@@ -1,20 +1,22 @@
 <?php
+declare(strict_types=1);
 /**
- * functions.php - Hilfsfunktionen für Notiz-Manager
- * 
+ * functions.php – Hilfsfunktionen für Notiz-Manager
+ *
  * Enthält alle Funktionen für:
  * - Authentifizierung und Benutzer-Management
  * - CRUD-Operationen für Notizen (mit User-Rechten)
  * - Kategorie-Verwaltung
  * - Security (XSS-Schutz via htmlspecialchars)
  */
-declare(strict_types=1);
+// Notiz: Datei-Header und Kurzbeschreibung
 
 /**
  * Hilfsfunktion: HTML-Sonderzeichen escapen
  */
 function safe(string $str): string {
   return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
+  // Notiz: Wandelt Zeichen in HTML-Entities um (XSS-Schutz)
 }
 
 /**
@@ -22,6 +24,7 @@ function safe(string $str): string {
  */
 function is_logged_in(): bool {
   return !empty($_SESSION['user']);
+  // Notiz: Gibt true zurück, wenn ein User eingeloggt ist
 }
 
 /**
@@ -31,11 +34,13 @@ function authenticate(PDO $pdo, string $username, string $password): bool {
   $stmt = $pdo->prepare('SELECT password_hash FROM users WHERE username = ?');
   $stmt->execute([$username]);
   $user = $stmt->fetch();
-  
+  // Notiz: Holt den Passwort-Hash aus der Datenbank
   if ($user && password_verify($password, $user->password_hash)) {
     return true;
+    // Notiz: Passwort stimmt überein
   }
   return false;
+  // Notiz: Passwort stimmt nicht
 }
 
 /**
