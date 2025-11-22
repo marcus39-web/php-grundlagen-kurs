@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 /**
  * categ-manager.php - Kategorieverwaltung
  * 
@@ -9,6 +12,15 @@
 include_once 'header.php';
 
 $categs = getAllCategories($pdo);
+
+// Debug-Ausgabe: Kategorien direkt ausgeben
+try {
+    $result = $pdo->query('SELECT * FROM categories');
+    $allCats = $result ? $result->fetchAll() : [];
+    echo '<pre>Kategorien: ' . print_r($allCats, true) . '</pre>';
+} catch (Exception $e) {
+    echo '<pre>Fehler beim Kategorien-Query: ' . $e->getMessage() . '</pre>';
+}
 ?>
   <main class="container">
     <section class="card">
