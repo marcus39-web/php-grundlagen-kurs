@@ -1,11 +1,4 @@
 <?php
-/**
- * logout.php - Benutzer abmelden
- * 
- * Meldet den Benutzer ab, setzt last_activity auf NULL
- * und leitet zur Startseite weiter.
-
-<?php
 declare(strict_types=1);
 /**
  * logout.php – Benutzer abmelden
