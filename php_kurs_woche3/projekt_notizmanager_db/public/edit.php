@@ -1,4 +1,3 @@
-
 <?php
 /**
  * edit.php – Notiz bearbeiten
@@ -44,4 +43,3 @@ if(!$note) { header('Location: index.php'); exit; }
     </form>
   </main>
 <?php include_once 'footer.php'; ?>
-// Notiz: Bindet das Footer-Template ein
