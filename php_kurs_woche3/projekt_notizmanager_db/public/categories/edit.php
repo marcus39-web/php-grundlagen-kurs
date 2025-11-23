@@ -49,4 +49,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </form>
 </main>
 <?php include_once '../footer.php'; ?>
-// Notiz: Bindet das Footer-Template ein
+

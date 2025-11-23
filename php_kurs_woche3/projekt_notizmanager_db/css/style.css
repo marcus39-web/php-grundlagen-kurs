@@ -154,6 +154,14 @@ td {
   text-align: left;
 }
 
+/* Das Eingabefeld für den Notiz-Inhalt (textarea) ist doppelt so breit wie die Standardfelder */
+form textarea[name="content"] {
+  width: 100%;
+  min-width: 600px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
 /* Responsive Design für Handy/Tablet
    - Alle Container und Felder werden auf 100% Breite gesetzt
    - Schriftgröße angepasst

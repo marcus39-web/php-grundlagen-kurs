@@ -127,4 +127,4 @@ $users = $stmt->fetchAll();
 </main>
 
 <?php include_once 'footer.php'; ?>
-// Notiz: Bindet das Footer-Template ein
+
