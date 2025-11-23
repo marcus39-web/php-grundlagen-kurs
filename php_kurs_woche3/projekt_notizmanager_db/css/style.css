@@ -101,6 +101,7 @@ button {
   padding: 10px;
   border: 1px solid var(--border);
   border-radius: 10px;
+  font-size: 22px;
 }
 
 /* Standard-Button: Primärfarbe, weiße Schrift */
