@@ -28,3 +28,20 @@ a.button{display:inline-block;padding:10px 12px;border:1px solid var(--border);b
 .text-danger{color:var(--danger)}
 table{width:100%;border-collapse:collapse}
 th,td{padding:10px;border-bottom:1px solid var(--border);text-align:left}
+/* Responsive Design für Handy/Tablet */
+@media (max-width: 600px) {
+  .container, .card, table, input, button {
+    width: 100%;
+    font-size: 1em;
+  }
+  .flex, .grid {
+    flex-direction: column;
+  }
+  .mb-10, .p-8, .rounded-xl, .shadow-lg {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: none;
+  }
+  /* Weitere Anpassungen nach Bedarf */
+}
