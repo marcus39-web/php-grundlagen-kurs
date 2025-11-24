@@ -28,15 +28,18 @@ if (empty($_SESSION['user']) || strtolower($_SESSION['user']) !== 'admin') {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout_user'])) {
   $username = $_POST['username'] ?? '';
   // Notiz: Holt den Benutzernamen aus dem Formular
+
   if ($username && $username !== 'admin') {
     $stmt = $pdo->prepare('UPDATE users SET last_activity = NULL WHERE username = ?');
     $stmt->execute([$username]);
     $success = "Benutzer '$username' wurde abgemeldet.";
+
     // Notiz: Setzt last_activity auf NULL und zeigt Erfolgsmeldung
   }
 }
 
 // Alle Benutzer abrufen (außer admin)
+
 $stmt = $pdo->query("
   SELECT 
     id,
@@ -53,6 +56,7 @@ $stmt = $pdo->query("
   ORDER BY is_online DESC, username ASC
 ");
 $users = $stmt->fetchAll();
+
 // Notiz: Holt alle User aus der Datenbank, sortiert nach Online-Status und Name
 ?>
 
@@ -65,6 +69,7 @@ $users = $stmt->fetchAll();
       <p style="padding: 1rem; background-color: #d4edda; color: #155724; border-radius: 4px; margin-bottom: 1rem;">
         <?= safe($success) ?>
         <!-- Notiz: Erfolgsmeldung nach Abmelden eines Users -->
+
       </p>
     <?php endif; ?>
 
@@ -83,20 +88,24 @@ $users = $stmt->fetchAll();
           <tr>
             <td style="text-align: center;">
               <span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background-color: <?= $user->is_online ? '#22c55e' : '#ef4444' ?>;"></span>
+
               <!-- Notiz: Grüner Punkt = online, roter Punkt = offline -->
             </td>
             <td><?= safe($user->username) ?></td>
             <!-- Notiz: Zeigt den Benutzernamen -->
             <td><?= safe($user->created_at) ?></td>
             <!-- Notiz: Zeigt das Registrierungsdatum -->
+
             <td>
               <?php 
               if ($user->last_activity) {
                 echo safe($user->last_activity);
+
                 // Notiz: Zeigt die letzte Aktivität
               } else {
                 echo '<em>Offline</em>';
                 // Notiz: Zeigt "Offline" an, wenn keine Aktivität vorhanden
+
               }
               ?>
             </td>
@@ -107,21 +116,25 @@ $users = $stmt->fetchAll();
                   <button type="submit" name="logout_user" class="button" style="background-color: #f59e0b;">
                     Abmelden
                   </button>
+
                   <!-- Notiz: Button zum Abmelden des Users -->
                 </form>
               <?php else: ?>
                 <span style="color: #999;">Bereits offline</span>
                 <!-- Notiz: Hinweis, dass der User bereits offline ist -->
+
               <?php endif; ?>
             </td>
           </tr>
         <?php endforeach; ?>
       </tbody>
     </table>
+
     <p style="margin-top: 1rem; font-size: 0.9em; color: #666;">
       <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background-color: #22c55e; margin-right: 5px;"></span> Online &nbsp;&nbsp;
       <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background-color: #ef4444; margin-right: 5px;"></span> Offline
       <!-- Notiz: Legende für die Statuspunkte -->
+
     </p>
   </section>
 </main>

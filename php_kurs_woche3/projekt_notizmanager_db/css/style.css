@@ -8,7 +8,6 @@ Beschreibung: Modernes, helles Layout für die gesamte App
 
 /*
 Farbvariablen für das gesamte Design
---bg: Hintergrundfarbe
 --fg: Standard-Schriftfarbe
 --muted: Gedämpfte Schriftfarbe (z.B. Hinweise)
 --primary: Hauptfarbe für Buttons und Akzente
@@ -19,11 +18,11 @@ Farbvariablen für das gesamte Design
 :root {
   --bg: #f6f8fb;
   --fg: #111;
-  --muted: #3d4246;
-  --primary: #2569fa;
+  --muted: #6b7280;
+  --primary: #2563eb;
   --card: #fff;
   --border: #e5e7eb;
-  --danger: #e91111;
+  --danger: #dc2626;
 }
 
 /* Box-Modell: Alle Elemente berücksichtigen Padding und Border in der Breite */
@@ -37,11 +36,8 @@ body {
   margin: 0;
   padding: 0;
   background: var(--bg);
-  /* Hintergrundfarbe */
   color: var(--fg);
-  /* Standard-Schriftfarbe */
-  font: 19px/1.5 system-ui;
-  /* Moderne Systemschrift, angenehmes Zeilenlayout */
+  font: 16px/1.5 system-ui;
 }
 
 /* Kopfbereich der Seite */
@@ -68,43 +64,30 @@ header {
   margin-bottom: 16px;
 }
 
-/* Navigation: horizontale Anordnung der Links */
-nav {
-  .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  ul {
-    display: flex;
-    list-style: none;
-  }
-
-  li {
-    margin-right: 1rem;
-  }
+nav ul {
+  display: flex;
+  list-style: none;
 }
 
-/* Labels für Formularfelder */
+nav ul li {
+  margin-right: 1rem;
+}
+
 label {
   display: block;
   margin: 8px 0;
 }
 
-/* Grunddesign für alle Eingabefelder und Buttons */
 input,
 textarea,
 select,
 button {
-  width: 50%;
+  width: 100%;
   padding: 10px;
   border: 1px solid var(--border);
   border-radius: 10px;
-  font-size: 22px;
 }
 
-/* Standard-Button: Primärfarbe, weiße Schrift */
 button {
   background: var(--primary);
   color: #fff;
@@ -113,7 +96,6 @@ button {
   cursor: pointer;
 }
 
-/* Link-Button: Sieht aus wie ein Button, ist aber ein Link */
 a.button {
   display: inline-block;
   padding: 10px 12px;
@@ -122,7 +104,6 @@ a.button {
   text-decoration: none;
 }
 
-/* Hinweis-/Fehlermeldungen */
 .alert {
   background: #fff3cd;
   border: 1px solid #ffe69c;
@@ -131,69 +112,22 @@ a.button {
   margin-bottom: 12px;
 }
 
-/* Gedämpfte Schriftfarbe für Hinweise */
 .text-muted {
   color: var(--muted);
 }
 
-/* Warn-/Fehlerfarbe für Text */
 .text-danger {
   color: var(--danger);
 }
 
-/* Tabellenlayout: volle Breite, keine Zwischenräume */
 table {
   width: 100%;
   border-collapse: collapse;
 }
 
-/* Tabellenzellen: Abstand, untere Linie, linksbündig */
 th,
 td {
   padding: 10px;
   border-bottom: 1px solid var(--border);
   text-align: left;
-}
-
-/* Das Eingabefeld für den Notiz-Inhalt (textarea) ist doppelt so breit wie die Standardfelder */
-form textarea[name="content"] {
-  width: 100%;
-  min-width: 600px;
-  max-width: 100%;
-  box-sizing: border-box;
-}
-
-/* Responsive Design für Handy/Tablet
-   - Alle Container und Felder werden auf 100% Breite gesetzt
-   - Schriftgröße angepasst
-   - Layout wird von horizontal auf vertikal umgestellt
-   - Abstände und Rundungen werden reduziert
-*/
-@media (max-width: 600px) {
-
-  .container,
-  .card,
-  table,
-  input,
-  button {
-    width: 100%;
-    font-size: 1em;
-  }
-
-  .flex,
-  .grid {
-    flex-direction: column;
-  }
-
-  .mb-10,
-  .p-8,
-  .rounded-xl,
-  .shadow-lg {
-    margin-bottom: 1rem;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    box-shadow: none;
-  }
-
-
 }

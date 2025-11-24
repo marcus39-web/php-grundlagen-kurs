@@ -17,7 +17,7 @@ try {
     'mysql:host=%s;dbname=%s;charset=%s',
     $_ENV['DB_HOST'],
     $_ENV['DB_NAME'],
-    $_ENV['DB_CHARSET'],
+    $_ENV['DB_CHARSET']
   );
   // Notiz: Baut den DSN-String für die PDO-Verbindung
 

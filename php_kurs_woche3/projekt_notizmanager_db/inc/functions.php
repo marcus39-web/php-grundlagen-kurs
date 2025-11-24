@@ -51,7 +51,6 @@ function getAllNotes(PDO $pdo): array {
   if (empty($_SESSION['user'])) {
     return [];
   }
-  
   // Admin sieht alle Notizen
   if (strtolower($_SESSION['user']) === 'admin') {
     $sql = 'SELECT n.id, n.title, n.content, n.created_at, c.name as category, u.username
@@ -61,17 +60,13 @@ function getAllNotes(PDO $pdo): array {
             ORDER BY n.created_at DESC';
     return $pdo->query($sql)->fetchAll();
   }
-  
   // User-ID ermitteln
   $stmt = $pdo->prepare('SELECT id FROM users WHERE username = ?');
   $stmt->execute([$_SESSION['user']]);
   $user = $stmt->fetch();
-  
   if (!$user) {
     return [];
   }
-  
-  // Nur eigene Notizen
   $sql = 'SELECT n.id, n.title, n.content, n.created_at, c.name as category
           FROM notes n
           LEFT JOIN categories c ON n.category_id = c.id
@@ -81,7 +76,6 @@ function getAllNotes(PDO $pdo): array {
   $stmt->execute([$user->id]);
   return $stmt->fetchAll();
 }
-
 /**
  * Eine einzelne Notiz anhand der ID abrufen
  * Admin kann alle Notizen sehen, normale User nur ihre eigenen
@@ -90,7 +84,6 @@ function getNoteById(PDO $pdo, int $id): ?object {
   if (empty($_SESSION['user'])) {
     return null;
   }
-  
   // Admin kann alle Notizen sehen
   if (strtolower($_SESSION['user']) === 'admin') {
     $stmt = $pdo->prepare('SELECT * FROM notes WHERE id = ?');
@@ -98,16 +91,13 @@ function getNoteById(PDO $pdo, int $id): ?object {
     $result = $stmt->fetch();
     return $result ?: null;
   }
-  
   // User-ID ermitteln
   $stmt = $pdo->prepare('SELECT id FROM users WHERE username = ?');
   $stmt->execute([$_SESSION['user']]);
   $user = $stmt->fetch();
-  
   if (!$user) {
     return null;
   }
-  
   // Nur eigene Notizen
   $stmt = $pdo->prepare('SELECT * FROM notes WHERE id = ? AND user_id = ?');
   $stmt->execute([$id, $user->id]);
@@ -123,17 +113,14 @@ function addNote(PDO $pdo, string $title, string $content, ?int $categoryId = nu
   if (empty($_SESSION['user'])) {
     return false;
   }
-  
   // User-ID ermitteln
   $stmt = $pdo->prepare('SELECT id FROM users WHERE username = ?');
   $stmt->execute([$_SESSION['user']]);
   $user = $stmt->fetch();
-  
   if (!$user) {
     return false;
   }
-  
-  $stmt = $pdo->prepare('INSERT INTO notes (user_id, title, content, category_id) VALUES (?, ?, ?, ?)');
+  $stmt = $pdo->prepare('INSERT INTO notes (user_id, title, content, category_id, created_at) VALUES (?, ?, ?, ?, NOW())');
   return $stmt->execute([$user->id, $title, $content, $categoryId]);
 }
 

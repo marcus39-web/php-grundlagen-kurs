@@ -44,3 +44,4 @@ if ($title !== '' && $content !== '') {
 header('Location: index.php');
 exit;
 // Notiz: Leitet nach dem Speichern zurück zur Übersicht und beendet das Skript
+

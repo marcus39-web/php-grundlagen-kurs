@@ -1,4 +1,3 @@
-
 <?php
 /**
  * footer.php – Seitenfuß mit "Zurück auf Los" Button
@@ -14,3 +13,4 @@
 </body>
 </html>
 <!-- Notiz: Seitenende -->
+

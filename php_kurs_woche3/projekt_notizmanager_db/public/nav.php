@@ -13,8 +13,8 @@
 // Notiz: Datei-Header und Kurzbeschreibung
 ?>
 <nav>
-  <div class="container">
-    <ul>
+  <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+    <ul style="display: flex; gap: 2rem; margin: 0; padding: 0; list-style: none;">
       <li><a href="<?= $path ?>index.php">Notizen</a></li>
       <!-- Notiz: Link zur Notizen-Übersicht -->
       <li><a href="<?= $path ?>categ-manager.php">Kategorien</a></li>
@@ -31,7 +31,7 @@
         <!-- Notiz: Link zur Registrierung für Gäste -->
       <?php endif; ?>
     </ul>
-    <div class="text-muted">
+    <div class="text-muted" style="margin-left: auto;">
       <?php if(!empty($_SESSION['user'])): ?>
         Eingeloggt als <strong><?= safe($_SESSION['user']) ?></strong> - <a href="<?= $path ?>logout.php">Logout</a>
         <!-- Notiz: Anzeige des eingeloggten Benutzers und Logout-Link -->
