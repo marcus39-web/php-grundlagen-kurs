@@ -5,47 +5,76 @@
     <meta charset="UTF-8">
     <title>Ostersonntag</title>
     <style>
+        /*
+         * body: Grundlegende Schriftart für die Seite
+         * container: zentrierter Bereich mit Hintergrund, Padding, abgerundeten Ecken und Schatten
+         * label: sorgt für Abstand und Blockdarstellung der Feldbeschriftungen
+         * input[type="text"]: macht die Eingabefelder breit und komfortabel
+         * button, input[type="reset"]: Abstand zwischen den Buttons
+         */
         body {
             font-family: Arial, sans-serif;
+            /* Moderne, gut lesbare Schrift */
         }
 
         .container {
             background: #fafafa;
+            /* Helles Grau als Hintergrund */
             padding: 2em;
+            /* Innenabstand */
             margin: 2em;
+            /* Außenabstand zur Seite */
             border-radius: 8px;
+            /* Abgerundete Ecken */
             box-shadow: 0 2px 8px #ccc;
+            /* leichter Schatten für 3D-Effekt */
             max-width: 400px;
+            /* maximale Breite, damit das Formular kompakt bleibt */
         }
 
         label {
             display: block;
-            margin-top: 8em;
+            /* Jede Beschriftung steht über dem Eingabefeld */
+            margin-top: 1em;
+            /* Abstand nach oben */
         }
 
         input[type="text"] {
             width: 100%;
+            /* Volle Breite im Container */
             padding: 0.5em;
+            /* Innenabstand für bessere Lesbarkeit */
             margin-bottom: 0.5em;
+            /* Abstand nach unten */
         }
 
         button,
         input[type="reset"] {
             margin-right: 1em;
+            /* Abstand zwischen den Buttons */
         }
     </style>
 </head>
 
 <body>
+    <!-- body: Enthält das gesamte sichtbare HTML -->
     <div class="container">
+        <!-- container: Optisch abgesetzter Bereich für das Formular -->
         <h1>Ostersonntag</h1>
+        <!-- Formular zur Eingabe der Jahreszahlen -->
         <form action="ostersonntag.php" method="get">
             <p>Bitte geben Sie zwei Jahreszahlen ein<br>und senden Sie das Formular ab:</p>
+            <!-- label: Beschriftung für das erste Eingabefeld -->
             <label for="jahr1">Erste Jahreszahl</label>
+            <!-- input: Textfeld für die erste Jahreszahl -->
             <input type="text" id="jahr1" name="jahr1" required>
+            <!-- label: Beschriftung für das zweite Eingabefeld -->
             <label for="jahr2">Zweite Jahreszahl</label>
+            <!-- input: Textfeld für die zweite Jahreszahl -->
             <input type="text" id="jahr2" name="jahr2" required>
+            <!-- button: Absenden des Formulars -->
             <button type="submit">Absenden</button>
+            <!-- reset: Zurücksetzen des Formulars -->
             <input type="reset" value="Zurücksetzen">
         </form>
     </div>
