@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ostersonntag</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            background: #fafafa;
+            padding: 2em;
+            margin: 2em;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px #ccc;
+            max-width: 400px;
+        }
+
+        label {
+            display: block;
+            margin-top: 8em;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 0.5em;
+            margin-bottom: 0.5em;
+        }
+
+        button,
+        input[type="reset"] {
+            margin-right: 1em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Ostersonntag</h1>
+        <form action="ostersonntag.php" method="get">
+            <p>Bitte geben Sie zwei Jahreszahlen ein<br>und senden Sie das Formular ab:</p>
+            <label for="jahr1">Erste Jahreszahl</label>
+            <input type="text" id="jahr1" name="jahr1" required>
+            <label for="jahr2">Zweite Jahreszahl</label>
+            <input type="text" id="jahr2" name="jahr2" required>
+            <button type="submit">Absenden</button>
+            <input type="reset" value="Zurücksetzen">
+        </form>
+    </div>
+</body>
+
+</html>
