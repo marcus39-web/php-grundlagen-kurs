@@ -11,46 +11,39 @@
   <h2>Zeichenketten formatieren</h2>
 
   <?php
+    // Beispiel-Text
     $text = 'Welt';
-    
-    /* Die Funktion printf()
-    Synthax: printf(Formatierung [, Argument1 [, Argument2, ...]]) */
-    
-    printf('<p>Ausgabe Typ b: <b>%b</b></p>', 256);
-    printf('<p>Ausgabe Typ c: <b>%c</b></p>', 65);
-    printf('<p>Ausgabe Typ d: <b>%d</b></p>', 3);
-    printf('<p>Ausgabe Typ f: <b>%f</b></p>', 3.65);
-    printf('<p>Ausgabe Typ s: <b>%s</b> <i>%s</i></p>', 'Hallo ', $text);
-    printf('<p>Ausgabe Typ x: <b>%x</b></p>', 65);
-
+    // Die Funktion printf() gibt formatierte Strings aus.
+    // %b: Binärzahl, %c: ASCII-Zeichen, %d: Dezimalzahl, %f: Float, %s: String, %x: Hexadezimal
+    printf('<p>Ausgabe Typ b (binär): <b>%b</b></p>', 256); // 256 als Binärzahl
+    printf('<p>Ausgabe Typ c (ASCII): <b>%c</b></p>', 65); // ASCII-Zeichen für 65 ('A')
+    printf('<p>Ausgabe Typ d (dezimal): <b>%d</b></p>', 3); // Dezimalzahl
+    printf('<p>Ausgabe Typ f (float): <b>%f</b></p>', 3.65); // Fließkommazahl
+    printf('<p>Ausgabe Typ s (string): <b>%s</b> <i>%s</i></p>', 'Hallo ', $text); // Zwei Strings
+    printf('<p>Ausgabe Typ x (hex): <b>%x</b></p>', 65); // Hexadezimal
 
     echo '<h2>Füllzeichen ausgeben</h2>';
-    /* Füllzeichen ausgeben */
+    // Füllzeichen mit printf: '*' füllt auf 8 Zeichen auf
     printf("<p>8 Zeichen gefüllt: <b>%'*8s</b></p>", 'Hall');
-
-    /* Füllzeichen für Floats */
+    // Füllzeichen und Nachkommastellen für Fließkommazahlen
     $zahl1 = 157.549862;
     $zahl2 = 300;
-
-    printf('<p>2 Stellen: <b>%.2f</b></p>', $zahl1);
-    printf('<p>4 Stellen: <b>%.4f</b></p>', $zahl1);
-    printf('<p>Ganzzahl: <b>%.2f</b></p>', $zahl2);
-    printf('<p>6 Zeichen: <b>%08.2f</b></p>', $zahl1);
-    printf("<p>10 Zeichen: <b>%'X12.3f</b></p>", $zahl1);
+    printf('<p>2 Stellen: <b>%.2f</b></p>', $zahl1); // 2 Nachkommastellen
+    printf('<p>4 Stellen: <b>%.4f</b></p>', $zahl1); // 4 Nachkommastellen
+    printf('<p>Ganzzahl: <b>%.2f</b></p>', $zahl2); // 2 Nachkommastellen bei Ganzzahl
+    printf('<p>6 Zeichen: <b>%08.2f</b></p>', $zahl1); // 8 Zeichen, mit Nullen aufgefüllt
+    printf("<p>10 Zeichen: <b>%'X12.3f</b></p>", $zahl1); // 12 Zeichen, mit 'X' gefüllt
 
     echo '<h2>Die Funktion <code>number_format()</code></h2>';
-    /* Die Funktion number_format()
-    Synthax: number_format(Zahl, Stellen, 'Nachkomma', 'Tausender') */
-
+    // number_format() formatiert Zahlen mit Tausendertrennzeichen und Nachkommastellen
+    // Syntax: number_format(Zahl, Nachkommastellen, 'Nachkomma', 'Tausender')
     $zahl = 23456789.7583;
-
     echo "<p><em>Vorher:</em> $zahl</p>";
     echo '<p><em>Nachher:</em></p>';
-    echo '<p>' . number_format($zahl, 2) . '</p>';
-    echo '<p>' . number_format($zahl, 2, ',', '.') . '</p>';
-    echo '<p>' . number_format($zahl, 2, ',', ' ') . '</p>';
-
-    /* Rückgabe von Zeichenketten */
+    echo '<p>' . number_format($zahl, 2) . '</p>'; // Standard: 2 Nachkommastellen, Komma
+    echo '<p>' . number_format($zahl, 2, ',', '.') . '</p>'; // Komma als Nachkomma, Punkt als Tausender
+    echo '<p>' . number_format($zahl, 2, ',', ' ') . '</p>'; // Leerzeichen als Tausender
+    // sprintf() gibt formatierte Strings zurück (wie printf, aber als Wert)
     echo sprintf('<p>2 Stellen: <b>%.2f</b></p>', $zahl1);
 
   ?>
@@ -59,20 +52,18 @@
   <?php
     
     $string = 'brigitte_B@gmail.com';
-
     echo "<p>Original-Zeichenkette: <b>$string</b></p>";
-
-    /* Finde eine Zeichenkette */
-    echo "<p><code>strstr()</code>:<br>Suche nach B@ ergibt: " . strstr($string, 'B@');
-    echo '<br>Suche nach b@ ergibt: ' . strstr($string, 'b@') . '</p>';
-
+    // strstr(): Sucht nach Teilzeichenkette und gibt alles ab Fund zurück (Groß-/Kleinschreibung beachten)
+    echo "<p><code>strstr()</code>:<br>Suche nach B@ ergibt: " . strstr($string, 'B@'); // findet 'B@'
+    echo '<br>Suche nach b@ ergibt: ' . strstr($string, 'b@') . '</p>'; // findet 'b@'
+    // stristr(): wie strstr, aber ohne Beachtung der Groß-/Kleinschreibung
     echo '<p>Suche nach b@ ergibt: ' . stristr($string, 'b@') . '</p>';
-
-    /* Finde ein Zeichen */
+    // strchr(): Sucht nach Zeichen und gibt alles ab Fund zurück
     echo '<p><code>strchr()</code>:<br>Suche nach i ergibt: ' . strchr($string, 'i');
     echo '<br>Suche nach I ergibt: ' . strchr($string, 'I');
-
+    // stristr(): wie strchr, aber ohne Groß-/Kleinschreibung
     echo '<br>stristr(): Suche nach I ergibt: ' . stristr($string, 'I');
+    // strrchr(): Sucht das letzte Vorkommen eines Zeichens
     echo '<br>strrchr(): Suche nach i ergibt: ' . strrchr($string, 'i');
 
     /* Nach Phrasen innerhalb, am Anfang und am Ende suchen */
@@ -80,46 +71,42 @@
     $aHaystack = ['Am Anfang ist alles schwer', 'Einfacher wird es am Ende'];
     $aNeedle = ['Anfang', 'Ende'];
 
+    // str_contains(): Prüft, ob ein Wort in einem Satz enthalten ist
+    // str_starts_with(): Prüft, ob ein Satz mit einem Wort beginnt
+    // str_ends_with(): Prüft, ob ein Satz mit einem Wort endet
     echo '<table border="1">';
-
     foreach( $aHaystack as $sString ) {
-      /* Erste Schleife durchläuft das Array mit den Sätzen */
-
       foreach( $aNeedle as $sWord ) {
-        /* Zweite Schleife durchläuft dann das Array mit den Suchworten */
-
+        // Enthält der Satz das Wort?
         if( str_contains( $sString, $sWord ) ) {
           $sErgebnis = 'JA';
         } else {
           $sErgebnis = 'NEIN';
         }
-
         echo '<tr>';
           echo '<td><code>str_contains</code></td>';
           echo "<td>$sString</td>";
           echo "<td>$sWord</td>";
           echo "<td>$sErgebnis</td>";
         echo '</tr>';
-
+        // Beginnt der Satz mit dem Wort?
         if( str_starts_with( $sString, $sWord ) ) {
           $sErgebnis = 'JA';
         } else {
           $sErgebnis = 'NEIN';
         }
-
         echo '<tr>';
           echo '<td><code>str_starts_with</code></td>';
           echo "<td>$sString</td>";
           echo "<td>$sWord</td>";
           echo "<td>$sErgebnis</td>";
         echo '</tr>';
-
+        // Endet der Satz mit dem Wort?
         if( str_ends_with( $sString, $sWord ) ) {
           $sErgebnis = 'JA';
         } else {
           $sErgebnis = 'NEIN';
         }
-
         echo '<tr>';
           echo '<td><code>str_ends_with</code></td>';
           echo "<td>$sString</td>";
@@ -128,7 +115,6 @@
         echo '</tr>';
       }
     }
-
     echo '</table>';
 
 
@@ -143,44 +129,25 @@
 
     /* Aufgabe: die URL aus der Mail-Adresse auslesen und mit Protokoll ausgeben */
     echo "<p>Mailadressen: $string, $string2<br>";
-
-    $pos = strpos($string, '@');
-
+    $pos = strpos($string, '@'); // Position des @-Zeichens
     echo 'Wert von $pos: ' . $pos . '<br>';
     echo '$url: https://www.' . substr( $string, $pos + 1 ) . '</p>';
-    
     $pos = strpos($string2, '@');
-
     echo '<p>Wert von $pos: ' . $pos . '<br>';
     echo '$url: https://www.' . substr( $string2, $pos + 1 ) . '</p>';
-
-
-    /* Länge der Zeichenkette mit strlen(String) */
+    // strlen(): Länge einer Zeichenkette
     echo "<p>Die Zeichenkette $string hat eine Länge von " . strlen($string) . " Zeichen.</p>";
     echo "<p>Die Zeichenkette $string2 hat eine Länge von " . strlen($string2) . " Zeichen.</p>";
-
-    /* Anzahl der gefundenen Suchergebnisse ausgeben */
+    // substr_count(): Anzahl eines Zeichens in einer Zeichenkette
     echo "<p>Der Buchstabe 'e' kommt in $string " . substr_count($string, 'e') . " mal vor.</p>";
     echo "<p>Der Buchstabe 'e' kommt in $string2 " . substr_count($string2, 'e') . " mal vor.</p>";
-
-    /* Zeichenketten wiederholen */
+    // str_repeat(): Zeichenkette wiederholen
     echo '<p>' . str_repeat('-', 8) . '</p>';
-
-    /* Leerraum oder andere Zeichen entfernen
-    folgende Zeichen werden entfernt:
-    \n (Zeilenumbruch)
-    \t (Tabulator)
-    \r (Wagenrücklauf)
-    \0 (0 Byte-Zeichen)
-    \v (vertikaler Tabulator)
-
-    trim(String [, Zeichenliste])   entfernt die Zeichen vor und nach dem String
-    ltrim(String [, Zeichenliste])  entfernt die Zeichen links vom String (Anfang)
-    rtrim(String [, Zeichenliste])  entfernt die Zeichen rechts vom String (Ende)
-
-    über den optionalen Parameter 'Zeichenliste' können weitere Zeichen angegeben werden, die ebenfalls entfernt werden.
-    */
-
+    // trim(), ltrim(), rtrim(): Leerzeichen und Steuerzeichen entfernen
+    // Entfernt z.B. \n (Zeilenumbruch), \t (Tabulator), \r (Wagenrücklauf), \0 (Nullbyte), \v (vertikaler Tabulator)
+    // trim(String [, Zeichenliste]) entfernt Zeichen am Anfang und Ende
+    // ltrim(String [, Zeichenliste]) entfernt Zeichen am Anfang
+    // rtrim(String [, Zeichenliste]) entfernt Zeichen am Ende
     $string = '           http://www.php.net/                 ';
     echo "Original: <pre>$string</pre>";
     $string = trim($string);
@@ -192,16 +159,16 @@
 
     echo "<p><em>Original:</em> $text</p>";
 
-    $kl = strtolower($text);
+    $kl = strtolower($text); // Alles klein
     echo "<p><code>strtolower():</code> $kl</p>";
 
-    $gr = strtoupper($text);
+    $gr = strtoupper($text); // Alles groß
     echo "<p><code>strtoupper():</code> $gr</p>";
 
-    $uf = ucfirst($text);
+    $uf = ucfirst($text); // Erstes Zeichen groß
     echo "<p><code>ucfirst():</code> $uf</p>";
 
-    $uw = ucwords($text);
+    $uw = ucwords($text); // Jedes Wort beginnt groß
     echo "<p><code>ucwords():</code> $uw</p>";
 
 
@@ -213,7 +180,7 @@
 
     $string = '|-----|-----|-----|-----|';
     echo "<p>Vorher: $string";
-    echo '<br>Nachher: ' . strtr( $string, '-|', 'x-' ) . '</p>';
+    echo '<br>Nachher: ' . strtr( $string, '-|', 'x-' ) . '</p>'; // '-' wird zu 'x', '|' zu '-'
 
     $string = 'Wäre Jörg ein großer Sänger, würde er schöne Lieder singen';
     echo '<p><i>strtr()</i> "flexibel mit Angabe eines Arrays"</p>';
@@ -221,16 +188,16 @@
 
     $umlaute = array( 'ä' => 'ae', 'ö' => 'oe', 'ü' => 'ue', 'ß' => 'ss' );
     
-    echo '<br>Nachher: ' . strtr( $string, $umlaute ) . '</p>';
+    echo '<br>Nachher: ' . strtr( $string, $umlaute ) . '</p>'; // Umlaute ersetzen
 
     $string = 'Meine Tante wohnt in Frankreich';
     echo '<p>str_replace()';
     echo "<br>Vorher: $string";
 
-    $string = str_replace('Tante', '<strong>Nichte</strong>', $string);
+    $string = str_replace('Tante', '<strong>Nichte</strong>', $string); // 'Tante' ersetzen
     echo "<br>Nachher (1): $string";
 
-    $string = str_replace('Frankreich', '<em>Italien</em>', $string);
+    $string = str_replace('Frankreich', '<em>Italien</em>', $string); // 'Frankreich' ersetzen
     echo "<br>Nachher (2): $string</p>";
 
 
@@ -242,17 +209,17 @@
     echo "<p><b>Zeichenkette: </b> $string</p>";
     echo '<p><b>explode():</b></p>';
 
-    $ausgabe = explode(';', $string, -2);
+    $ausgabe = explode(';', $string, -2); // In Array aufteilen, -2: zwei Einträge weniger
     echo '<pre>', print_r( $ausgabe, true ), '</pre>';
 
     /* implode(Verbindungszeichen, Array)
     erzeugt aus einem Array eine Zeichenkette, wobei die Array-Einträge anhand des Verbindungszeichens aneinandergereit werden. */
 
-    $ergebnis = implode(' * ', $ausgabe);
+    $ergebnis = implode(' * ', $ausgabe); // Array zu Zeichenkette verbinden
     echo "<p>Die Zeichenkette: $ergebnis</p>";
 
     /* Alternative zu explode(): str_split(String [, Länge]) */
-    $ausgabe = str_split($string, 3);
+    $ausgabe = str_split($string, 3); // Alle 3 Zeichen ein neues Array-Element
     echo '<pre>', print_r( $ausgabe, true ), '</pre>';
 
   ?>
