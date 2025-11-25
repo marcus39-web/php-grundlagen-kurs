@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datenbank Festplatten - Übungen</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .uebung {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .uebung-header {
+            background: #4CAF50;
+            color: white;
+            padding: 15px 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .uebung-content {
+            padding: 0;
+        }
+        iframe {
+            width: 100%;
+            border: none;
+            min-height: 400px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1> Datenbank Hardware - Festplatten Übungen</h1>
+
+        <div class="uebung">
+            <div class="uebung-header">Übung 1: Alle Datensätze anzeigen (u_db_anzeigen.php)</div>
+            <div class="uebung-content">
+                <iframe src="u_db_anzeigen.php" id="frame1"></iframe>
+            </div>
+        </div>
+
+        <div class="uebung">
+            <div class="uebung-header">Übung 2: Gefilterte Anzeige - GB > 60 und Preis < 150 € (u_db_zahl.php)</div>
+            <div class="uebung-content">
+                <iframe src="u_db_zahl.php" id="frame2"></iframe>
+            </div>
+        </div>
+
+        <div class="uebung">
+            <div class="uebung-header">Übung 3: Datumsfilter - Erstes Halbjahr 2008 (u_db_datum.php)</div>
+            <div class="uebung-content">
+                <iframe src="u_db_datum.php" id="frame3"></iframe>
+            </div>
+        </div>
+
+        <div class="uebung">
+            <div class="uebung-header">Übung 4: Preisgruppen mit Formular (u_db_radio.php)</div>
+            <div class="uebung-content">
+                <iframe src="u_db_radio.php" id="frame4"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // iFrame-Höhe automatisch anpassen
+        function resizeIframe(iframe) {
+            try {
+                iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 50 + 'px';
+            } catch(e) {
+                iframe.style.height = '500px';
+            }
+        }
+
+        // Nach dem Laden alle iFrames anpassen
+        window.addEventListener('load', function() {
+            document.querySelectorAll('iframe').forEach(function(iframe) {
+                iframe.addEventListener('load', function() {
+                    resizeIframe(this);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

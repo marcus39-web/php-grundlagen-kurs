@@ -1,6 +1,7 @@
 # Datenbank-Erstellung für Hardware-Übungen
 
 ## Übersicht
+
 Diese Anleitung zeigt die detaillierte Erstellung der Datenbank `hardware` mit der Tabelle `fp` (Festplatten) für die PHP-Übungen.
 
 ---
@@ -58,14 +59,14 @@ mysql -u root -p < /home/rio/projects/create_udb_anlegen_fp.sql
 
 ### Tabelle: `fp` (Festplatten)
 
-| Spaltenname | Datentyp | Eigenschaften | Beschreibung |
-|-------------|----------|---------------|--------------|
-| `artnummer` | VARCHAR(15) | PRIMARY KEY, NOT NULL | Eindeutige Artikelnummer |
-| `hersteller` | VARCHAR(25) | NOT NULL | Hersteller der Festplatte |
-| `typ` | VARCHAR(25) | NOT NULL | Typbezeichnung |
-| `gb` | INT(11) | NOT NULL | Speicherkapazität in GB |
-| `preis` | DOUBLE | NOT NULL | Preis in Euro |
-| `prod` | DATE | NOT NULL | Erstes Produktionsdatum |
+| Spaltenname  | Datentyp    | Eigenschaften         | Beschreibung              |
+| ------------ | ----------- | --------------------- | ------------------------- |
+| `artnummer`  | VARCHAR(15) | PRIMARY KEY, NOT NULL | Eindeutige Artikelnummer  |
+| `hersteller` | VARCHAR(25) | NOT NULL              | Hersteller der Festplatte |
+| `typ`        | VARCHAR(25) | NOT NULL              | Typbezeichnung            |
+| `gb`         | INT(11)     | NOT NULL              | Speicherkapazität in GB   |
+| `preis`      | DOUBLE      | NOT NULL              | Preis in Euro             |
+| `prod`       | DATE        | NOT NULL              | Erstes Produktionsdatum   |
 
 **Storage Engine:** InnoDB  
 **Zeichensatz:** UTF-8 (utf8mb4)  
@@ -77,29 +78,32 @@ mysql -u root -p < /home/rio/projects/create_udb_anlegen_fp.sql
 
 Die Tabelle enthält 5 Festplatten-Datensätze:
 
-| Hersteller | Typ | GB | Preis | Artikelnummer | Produktionsdatum |
-|------------|-----|----:|------:|--------------|------------------|
-| IBM Corporation | DJNA 3F2200 | 240 | 230 | HDA-140 | 15.06.2008 |
-| Seagate | 31023 2A | 60 | 122 | HDA-144 | 15.11.2008 |
-| Quantum | Fireball Plus | 80 | 128 | HDA-163 | 15.03.2008 |
-| Fujitsu | MPF 3136 | 160 | 149 | HDA-171 | 01.09.2008 |
-| Quantum | Fireball CX | 40 | 112 | HDA-208 | 01.10.2008 |
+| Hersteller      | Typ           |  GB | Preis | Artikelnummer | Produktionsdatum |
+| --------------- | ------------- | --: | ----: | ------------- | ---------------- |
+| IBM Corporation | DJNA 3F2200   | 240 |   230 | HDA-140       | 15.06.2008       |
+| Seagate         | 31023 2A      |  60 |   122 | HDA-144       | 15.11.2008       |
+| Quantum         | Fireball Plus |  80 |   128 | HDA-163       | 15.03.2008       |
+| Fujitsu         | MPF 3136      | 160 |   149 | HDA-171       | 01.09.2008       |
+| Quantum         | Fireball CX   |  40 |   112 | HDA-208       | 01.10.2008       |
 
 ---
 
 ## 4. Datenbank verifizieren
 
 ### Datenbank existiert prüfen
+
 ```bash
 mysql -u root -p -e "SHOW DATABASES LIKE 'hardware';"
 ```
 
 ### Tabelle anzeigen
+
 ```bash
 mysql -u root -p -e "USE hardware; DESCRIBE fp;"
 ```
 
 ### Daten anzeigen
+
 ```bash
 mysql -u root -p -e "USE hardware; SELECT * FROM fp;"
 ```
@@ -148,26 +152,30 @@ function db_datum_aus($datum) {
 ## 6. SQL-Abfrage-Beispiele
 
 ### Alle Datensätze anzeigen
+
 ```sql
 SELECT * FROM fp ORDER BY hersteller, typ;
 ```
 
 ### Festplatten mit mehr als 60 GB und Preis unter 150 €
+
 ```sql
-SELECT * FROM fp 
-WHERE gb > 60 AND preis < 150 
+SELECT * FROM fp
+WHERE gb > 60 AND preis < 150
 ORDER BY gb DESC;
 ```
 
 ### Festplatten aus dem ersten Halbjahr 2008
+
 ```sql
-SELECT hersteller, typ, prod, artnummer 
-FROM fp 
-WHERE prod >= '2008-01-01' AND prod <= '2008-06-30' 
+SELECT hersteller, typ, prod, artnummer
+FROM fp
+WHERE prod >= '2008-01-01' AND prod <= '2008-06-30'
 ORDER BY prod ASC;
 ```
 
 ### Preisgruppen abfragen
+
 ```sql
 -- Bis 120 € einschließlich
 SELECT hersteller, typ, preis FROM fp WHERE preis <= 120;
@@ -224,6 +232,7 @@ mysql -u root -p < create_udb_anlegen_fp.sql
 ### Problem: Zeichensatz-Probleme
 
 Stelle sicher, dass:
+
 - Datenbank mit UTF-8 erstellt wurde
 - PHP-Verbindung `charset=utf8mb4` verwendet
 - HTML-Seite `<meta charset="UTF-8">` enthält
