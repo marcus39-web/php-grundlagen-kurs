@@ -152,7 +152,7 @@ if (!empty($preisgruppe)) {
             
             <div class="buttons">
                 <button type="submit">Senden</button>
-                <button type="reset">Zurücksetzen</button>
+                <button type="button" onclick="window.location.href='u_db_radio.php'">Zurücksetzen</button>
             </div>
         </form>
     </div>
