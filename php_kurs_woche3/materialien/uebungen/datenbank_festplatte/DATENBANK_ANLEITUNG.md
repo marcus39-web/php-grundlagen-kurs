@@ -234,14 +234,16 @@ Stelle sicher, dass:
 
 ```
 php-grundlagen-kurs/
-├── create_udb_anlegen_fp.sql          # SQL-Datei zur DB-Erstellung
 └── php_kurs_woche3/
     └── materialien/
         └── uebungen/
-            ├── u_db_anzeigen.php      # Alle Datensätze anzeigen
-            ├── u_db_zahl.php          # Gefilterte Anzeige (GB > 60, Preis < 150)
-            ├── u_db_datum.php         # Datumsfilter (1. Halbjahr 2008)
-            └── u_db_radio.php         # Preisgruppen mit Formular
+            └── datenbank_festplatte/
+                ├── create_udb_anlegen_fp.sql    # SQL-Datei zur DB-Erstellung
+                ├── DATENBANK_ANLEITUNG.md       # Diese Anleitung
+                ├── u_db_anzeigen.php            # Alle Datensätze anzeigen
+                ├── u_db_zahl.php                # Gefilterte Anzeige (GB > 60, Preis < 150)
+                ├── u_db_datum.php               # Datumsfilter (1. Halbjahr 2008)
+                └── u_db_radio.php               # Preisgruppen mit Formular
 ```
 
 ---
