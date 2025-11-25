@@ -120,6 +120,21 @@ if (!empty($preisgruppe)) {
             line-height: 1.8;
         }
     </style>
+    <script>
+        function formularZuruecksetzen() {
+            // Alle Radio-Buttons deselektieren
+            document.querySelectorAll('input[name="preisgruppe"]').forEach(function(radio) {
+                radio.checked = false;
+            });
+            // Checkbox deselektieren
+            document.querySelector('input[name="sortieren"]').checked = false;
+            // Ergebnisbereich ausblenden
+            var ausgabe = document.querySelector('.ausgabe');
+            if (ausgabe) {
+                ausgabe.style.display = 'none';
+            }
+        }
+    </script>
 </head>
 <body>
     <h1>Daten auswählen</h1>
@@ -152,7 +167,7 @@ if (!empty($preisgruppe)) {
             
             <div class="buttons">
                 <button type="submit">Senden</button>
-                <button type="button" onclick="window.location.href='u_db_radio.php'">Zurücksetzen</button>
+                <button type="button" onclick="formularZuruecksetzen()">Zurücksetzen</button>
             </div>
         </form>
     </div>
