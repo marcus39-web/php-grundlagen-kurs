@@ -16,8 +16,6 @@
  * Es sollen nur die Angaben zu Hersteller, Typ und Preis geliefert werden.
  * Zusätzlich soll mithilfe eines Kontrollkästchens entschieden werden können,
  * ob eine Sortierung der Ausgabe nach absteigendem Preis gewünscht ist.
- * 
- * Das Formular soll so aussehen wie in Abbildung 3.18.
  */
 
 // Fehlerausgabe aktivieren (nur für Entwicklung)
