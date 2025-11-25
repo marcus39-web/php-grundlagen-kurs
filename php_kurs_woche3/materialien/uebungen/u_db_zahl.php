@@ -1,15 +1,14 @@
 <?php
 /**
- * Übung »u_db_anzeigen«
+ * Übung »u_db_zahl«
  * 
- * PHP-Programm zur Anzeige aller Datensätze aus der Tabelle fp 
- * in der Datenbank hardware (Übung »u_db_anlegen«).
+ * Zeigen Sie mit einem PHP-Programm aus der oben angegebenen Tabelle 
+ * nur noch bestimmte Datensätze (Datei u_db_zahl.php).
  * 
- * Es soll die Ausgabe aus Abbildung 3.12 haben.
- * Die Originaldatenbank inklusive der Tabelle nicht zur Verfügung stehen.
- * 
- * Nutzen Sie bei dieser und anderen Übungsaufgaben bei Bedarf 
- * die Datei zeitl.inc.php mit der Funktion db_datum_aus().
+ * Es soll die Ausgabe aus Abbildung 3.13 erzeugen: alle Arg (Datensätze)
+ * derjenigen Festplatten angezeigt werden, die einen maximalen Speicherplatz
+ * von mehr als 60 GByte haben und weniger als 150 € kosten, und zwar nach 
+ * maximalem Speicherplatz absteigend sortiert.
  */
 
 // Fehlerausgabe aktivieren (nur für Entwicklung)
@@ -18,8 +17,7 @@ error_reporting(E_ALL);
 
 // Datenbankverbindung herstellen
 try {
-    // Passwort eingeben - das gleiche wie bei mysql -u root -p
-    $passwort = 'Legefeld'; // HIER DEIN MYSQL ROOT PASSWORT EINTRAGEN
+    $passwort = 'Legefeld'; // MySQL root Passwort
     
     $pdo = new PDO(
         'mysql:host=localhost;dbname=hardware;charset=utf8mb4',
@@ -45,8 +43,11 @@ function db_datum_aus($datum) {
     return $datum;
 }
 
-// Alle Datensätze aus der Tabelle fp abrufen
-$sql = "SELECT * FROM fp ORDER BY hersteller, typ";
+// SQL-Abfrage mit Bedingungen:
+// - gb > 60 (mehr als 60 GByte)
+// - preis < 150 (weniger als 150 Euro)
+// - sortiert nach gb absteigend (DESC)
+$sql = "SELECT * FROM fp WHERE gb > 60 AND preis < 150 ORDER BY gb DESC";
 $stmt = $pdo->query($sql);
 $festplatten = $stmt->fetchAll();
 ?>
@@ -55,7 +56,7 @@ $festplatten = $stmt->fetchAll();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Datensätze anzeigen</title>
+    <title>Mehrere Bedingungen</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -71,7 +72,7 @@ $festplatten = $stmt->fetchAll();
     </style>
 </head>
 <body>
-    <h1>Datensätze anzeigen</h1>
+    <h1>Mehrere Bedingungen</h1>
     
     <div class="ausgabe">
         <?php foreach ($festplatten as $fp): ?>

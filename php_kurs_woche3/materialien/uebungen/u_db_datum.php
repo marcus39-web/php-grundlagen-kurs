@@ -1,15 +1,17 @@
 <?php
 /**
- * Übung »u_db_anzeigen«
+ * Übung »u_db_datum«
  * 
- * PHP-Programm zur Anzeige aller Datensätze aus der Tabelle fp 
- * in der Datenbank hardware (Übung »u_db_anlegen«).
+ * Zeigen Sie mit einem PHP-Programm aus der oben angegebenen Tabelle 
+ * nur noch bestimmte Informationen (Datei u_db_datum.php).
  * 
- * Es soll die Ausgabe aus Abbildung 3.12 haben.
- * Die Originaldatenbank inklusive der Tabelle nicht zur Verfügung stehen.
+ * Jetzt sollen alle Festplatten der Hersteller, Typ, Artikelnummer und 
+ * erstem Produktionsdatum angezeigt werden, die im ersten Halbjahr 2008 
+ * erstmalig produziert wurden, und zwar aufsteigend sortiert nach Datum 
+ * (siehe Abbildung 3.14).
  * 
- * Nutzen Sie bei dieser und anderen Übungsaufgaben bei Bedarf 
- * die Datei zeitl.inc.php mit der Funktion db_datum_aus().
+ * Datumsangaben müssen in SQL-Ausdrücken genauso wie Zeichenketten in 
+ * Hochkommata notiert werden.
  */
 
 // Fehlerausgabe aktivieren (nur für Entwicklung)
@@ -18,8 +20,7 @@ error_reporting(E_ALL);
 
 // Datenbankverbindung herstellen
 try {
-    // Passwort eingeben - das gleiche wie bei mysql -u root -p
-    $passwort = 'Legefeld'; // HIER DEIN MYSQL ROOT PASSWORT EINTRAGEN
+    $passwort = 'Legefeld'; // MySQL root Passwort
     
     $pdo = new PDO(
         'mysql:host=localhost;dbname=hardware;charset=utf8mb4',
@@ -45,8 +46,15 @@ function db_datum_aus($datum) {
     return $datum;
 }
 
-// Alle Datensätze aus der Tabelle fp abrufen
-$sql = "SELECT * FROM fp ORDER BY hersteller, typ";
+// SQL-Abfrage mit Bedingungen:
+// - prod >= '2008-01-01' (ab 1. Januar 2008)
+// - prod <= '2008-06-30' (bis 30. Juni 2008)
+// - sortiert nach prod aufsteigend (ASC)
+// Nur die Spalten hersteller, typ, prod, artnummer werden ausgewählt
+$sql = "SELECT hersteller, typ, prod, artnummer 
+        FROM fp 
+        WHERE prod >= '2008-01-01' AND prod <= '2008-06-30' 
+        ORDER BY prod ASC";
 $stmt = $pdo->query($sql);
 $festplatten = $stmt->fetchAll();
 ?>
@@ -55,7 +63,7 @@ $festplatten = $stmt->fetchAll();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Datensätze anzeigen</title>
+    <title>Vergleich von Datumsangaben</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -71,14 +79,12 @@ $festplatten = $stmt->fetchAll();
     </style>
 </head>
 <body>
-    <h1>Datensätze anzeigen</h1>
+    <h1>Vergleich von Datumsangaben</h1>
     
     <div class="ausgabe">
         <?php foreach ($festplatten as $fp): ?>
             <?= htmlspecialchars($fp['hersteller']) ?>, 
             <?= htmlspecialchars($fp['typ']) ?>, 
-            <?= htmlspecialchars($fp['gb']) ?>, 
-            <?= htmlspecialchars($fp['preis']) ?>, 
             <?= db_datum_aus($fp['prod']) ?>, 
             <?= htmlspecialchars($fp['artnummer']) ?><br>
         <?php endforeach; ?>
