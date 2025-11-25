@@ -16,7 +16,7 @@ try {
     
     $pdo = new PDO(
         'mysql:host=localhost;dbname=hardware;charset=utf8mb4',
-        'root',
+        'user_php',
         $passwort,
         [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $fehler = 'Bitte gültige Menge eingeben (größer als 0)!';
     } else {
         // Prüfen, ob Artikel existiert
-        $sql = "SELECT artnummer, hersteller, typ, menge FROM fp WHERE artnummer = ?";
+        $sql = "SELECT artnummer, hersteller, typ, Bestand FROM fp WHERE artnummer = ?";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$artnummer]);
         $artikel = $stmt->fetch();
@@ -54,18 +54,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $fehler = "Artikel mit Artikelnummer '$artnummer' nicht gefunden!";
         } else {
             // Menge zum Bestand addieren
-            $neue_menge = ($artikel['menge'] ?? 0) + intval($menge);
+            $neuer_bestand = ($artikel['Bestand'] ?? 0) + intval($menge);
             
-            $sql_update = "UPDATE fp SET menge = ? WHERE artnummer = ?";
+            $sql_update = "UPDATE fp SET Bestand = ? WHERE artnummer = ?";
             $stmt_update = $pdo->prepare($sql_update);
-            $stmt_update->execute([$neue_menge, $artnummer]);
+            $stmt_update->execute([$neuer_bestand, $artnummer]);
             
             $meldung = "Wareneingang erfolgreich gebucht!<br>";
             $meldung .= "Datum/Uhrzeit: " . date('d.m.Y H:i:s') . "<br>";
             $meldung .= "Artikel: {$artikel['hersteller']} {$artikel['typ']}<br>";
-            $meldung .= "Alter Bestand: " . ($artikel['menge'] ?? 0) . "<br>";
+            $meldung .= "Alter Bestand: " . ($artikel['Bestand'] ?? 0) . "<br>";
             $meldung .= "Zugang: $menge<br>";
-            $meldung .= "Neuer Bestand: $neue_menge";
+            $meldung .= "Neuer Bestand: $neuer_bestand";
             
             // Formular zurücksetzen
             $artnummer = '';
@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Alle Artikel für Übersicht laden
-$sql_alle = "SELECT artnummer, hersteller, typ, menge FROM fp ORDER BY artnummer";
+$sql_alle = "SELECT artnummer, hersteller, typ, Bestand FROM fp ORDER BY artnummer";
 $stmt_alle = $pdo->query($sql_alle);
 $alle_artikel = $stmt_alle->fetchAll();
 ?>
@@ -240,8 +240,8 @@ $alle_artikel = $stmt_alle->fetchAll();
                             <td><?= htmlspecialchars($artikel['artnummer']) ?></td>
                             <td><?= htmlspecialchars($artikel['hersteller']) ?></td>
                             <td><?= htmlspecialchars($artikel['typ']) ?></td>
-                            <td class="<?= ($artikel['menge'] ?? 0) < 5 ? 'bestand-niedrig' : 'bestand-ok' ?>">
-                                <?= htmlspecialchars($artikel['menge'] ?? 0) ?> Stück
+                            <td class="<?= ($artikel['Bestand'] ?? 0) < 5 ? 'bestand-niedrig' : 'bestand-ok' ?>">
+                                <?= htmlspecialchars($artikel['Bestand'] ?? 0) ?> Stück
                             </td>
                         </tr>
                     <?php endforeach; ?>
