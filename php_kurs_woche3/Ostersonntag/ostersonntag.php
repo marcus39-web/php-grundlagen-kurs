@@ -13,8 +13,15 @@ error_reporting(E_ALL);
    <style>
       /* Einfache Tabellen- und Zellenrahmen */
       table,
-      td {
+      td,
+      th {
          border: 1px solid black;
+      }
+      
+      /* Abstand zwischen den Zellen */
+      table {
+         border-collapse: separate;
+         border-spacing: 5px;
       }
    </style>
 </head>
@@ -40,7 +47,7 @@ error_reporting(E_ALL);
          $jahr2 = $tmp;
       }
       // Tabellenkopf ausgeben
-      echo "<table style='border-collapse:collapse;width:100%;margin-left:0;'>";
+      echo "<table style='width:100%;margin-left:0;'>";
       echo "<tr><th style='border:1px solid black;padding:4px;'>Jahr</th><th style='border:1px solid black;padding:4px;'>Datum</th></tr>";
       // Für jedes Jahr im Bereich das Datum berechnen und ausgeben
       for ($jahr = $jahr1; $jahr <= $jahr2; $jahr++) {
