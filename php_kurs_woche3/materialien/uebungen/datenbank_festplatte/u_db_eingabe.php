@@ -5,10 +5,11 @@ error_reporting(E_ALL);
 
 // Datenbankverbindung herstellen
 try {
-    $passwort = 'Legefeld';
+    $passwort = 'Legefeld'; // MySQL root Passwort
+    
     $pdo = new PDO(
         'mysql:host=localhost;dbname=hardware;charset=utf8mb4',
-        'user_php',
+        'root',
         $passwort,
         [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -16,13 +17,27 @@ try {
         ]
     );
 } catch (PDOException $e) {
-    die('Datenbankverbindung fehlgeschlagen: ' . $e->getMessage());
+    die("Datenbankverbindung fehlgeschlagen: " . $e->getMessage());
 }
 
 $hersteller = '';
 $festplatten = [];
 $fehler = '';
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $hersteller = trim($_POST['hersteller'] ?? '');
+    if (empty($hersteller)) {
+        $fehler = 'Bitte geben Sie einen Herstellernamen ein!';
+    } else {
+        $sql = 'SELECT hersteller, typ, gb, preis, artnummer, prod FROM fp WHERE hersteller = ?';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$hersteller]);
+        $festplatten = $stmt->fetchAll();
+        if (empty($festplatten)) {
+            $fehler = 'Keine Festplatten für diesen Hersteller gefunden.';
+        }
+    }
+}
 try {
     $passwort = 'Legefeld'; // MySQL root Passwort
     

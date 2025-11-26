@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Datei-Upload</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <header>
+    <h1>Datei-Upload: Formular</h1>
+  </header>
+  <main class="container">
+
+    <form action="file-upload.php" method="post" enctype="multipart/form-data">
+      <!-- Angabe einer maximalen Dateigröße in Bytes (hier: 2 MB). -->
+      <!-- das ist nur eine freundliche Erinnerung -->
+      <input type="hidden" name="MAX_FILE_SIZE" value="2000000">
+      <label>Wählen Sie ein Bild (*.jpg, *.png oder *.gif) zum Hochladen aus.
+        <input name="datei" type="file" accept="image/gif,image/jpeg,image/png,image/webp">
+      </label>
+      <button>Datei hochladen</button>
+    </form>
+
+  </main>
+</body>
+
+</html>

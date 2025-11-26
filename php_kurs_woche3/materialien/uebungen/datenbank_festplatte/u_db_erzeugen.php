@@ -3,14 +3,15 @@ declare(strict_types=1);
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
-require_once('pruefen.inc.php'); // Prüffunktionen einbinden
+require_once('u_db_erzeugen.inc.php'); // Prüffunktionen einbinden
 
 // Datenbankverbindung herstellen
 try {
-    $passwort = 'Legefeld';
+    $passwort = 'Legefeld'; // MySQL root Passwort
+    
     $pdo = new PDO(
         'mysql:host=localhost;dbname=hardware;charset=utf8mb4',
-        'user_php',
+        'root',
         $passwort,
         [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -18,7 +19,7 @@ try {
         ]
     );
 } catch (PDOException $e) {
-    die('Datenbankverbindung fehlgeschlagen: ' . $e->getMessage());
+    die("Datenbankverbindung fehlgeschlagen: " . $e->getMessage());
 }
 
 $meldung = '';
