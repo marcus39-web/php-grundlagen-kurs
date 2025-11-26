@@ -10,8 +10,12 @@ ini_set('display_errors', '1');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Datei-Upload: File-Upload</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <header>
+    <h1>Datei-Upload: File-Upload 2</h1>
+  </header>
     <form method="post" enctype="multipart/form-data">
         <input type="file" name="datei" required>
         <button type="submit">Datei hochladen</button>
@@ -52,7 +56,10 @@ echo '<pre>', print_r($type, true), '</pre>';
                     // wenn der Dateiname bereits exestiert (sehr unwahrscheinlich, aber nicht ausgeschlossen), neuer Schleifendurchlauf => neuer Dateiname
                 } while(file_exists($upload_dir . $new_filename));
 
-                // move_uploded_file() verschiebt die hochgeladene Datei aus dem temporären Verzeichnis mit dem neu generierten Dateinamen in das angegebene Verzeichnis
+                ?>
+                <img src="images/<?= $new_filename ?>" alt="Test">
+                <?php
+                // move_uploaded_file() verschiebt die hochgeladene Datei aus dem temporären Verzeichnis mit dem neu generierten Dateinamen in das angegebene Verzeichnis
                 move_uploaded_file($_FILES['datei']['tmp_name'], $upload_dir . $new_filename);
                 // Hier kannst du den Upload durchführen, z.B. move_uploaded_file()
             } else {
@@ -62,4 +69,4 @@ echo '<pre>', print_r($type, true), '</pre>';
             echo '<p class="bad">Falscher Dateityp</p>';
         }
     }
-  ?>
+?>
