@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['post_image'])) {
 <head>
     <meta charset="UTF-8">
     <title><?= htmlspecialchars($post['posts_header']) ?> - Artikelansicht</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/tailwind.css">
 </head>
 <body>
     <?php require_once __DIR__ . '/inc/header.inc.php'; ?>
