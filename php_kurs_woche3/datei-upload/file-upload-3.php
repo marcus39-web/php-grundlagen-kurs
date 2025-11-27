@@ -2,6 +2,7 @@
 declare(strict_types=1);
 error_reporting(E_ALL);
 ini_set('display_errors',true);
+ini_set('display_startup_errors', true);
 ?>
 <!DOCTYPE html>
 <html lang="de">
@@ -65,6 +66,8 @@ ini_set('display_errors',true);
       </ul>
     <?php
     endif;
+
+    
     
     $type = mime_content_type($_FILES['datei']['tmp_name']);
     $new_filename = '';

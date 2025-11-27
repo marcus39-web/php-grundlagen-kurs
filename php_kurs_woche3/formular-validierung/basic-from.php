@@ -111,7 +111,7 @@ if($spamcheck === true) {
 				</div>
 			<?php endif; ?>
 		<?php endif; ?>
-		<form id="phpform" method="post" action="basic-form.php">
+		<form id="phpform" method="post" action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>">
 	
 			<p>
 				<label for="name">Name<span>*</span></label>
