@@ -67,7 +67,7 @@ if($spamcheck === true) {
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Tutorial: PHP Formular Spamschutz und Validierung – Spam Emails verhindern auch ohne Captcha</title>
 		
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="css/style.css">
 	<script>
 		window.addEventListener("DOMContentLoaded", _=>{
 			const terms = document.querySelector(".terms");
@@ -111,7 +111,7 @@ if($spamcheck === true) {
 				</div>
 			<?php endif; ?>
 		<?php endif; ?>
-		<form id="phpform" method="post" action="basic-from.php">
+		<form id="phpform" method="post" action="basic-form.php">
 	
 			<p>
 				<label for="name">Name<span>*</span></label>

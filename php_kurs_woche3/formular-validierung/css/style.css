@@ -1,3 +1,4 @@
+
 /* Minimal, helles Layout für Kursdateien */
 :root{--bg:#f6f8fb;--fg:#111;--muted:#6b7280;--primary:#2563eb;--card:#fff;--border:#e5e7eb;--good:#059669;--ok:#8b5cf6;--bad:#dc2626;--gray30:#999;--gray-opacity20:#cccccc81;}
 *{box-sizing:border-box}html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial}

@@ -26,11 +26,46 @@ ini_set('display_errors',true);
     'image/jpeg' => 'jpg',
     'image/gif'  => 'gif',
     'image/png'  => 'png',
-    'image/webp'  => 'webp'
+    'image/webp'  => 'webp',
+    'application/pdf'  => 'pdf'
   ];
 
   // Prüfe, ob das Formular gesendet wurde und das $_FILES-Array bestückt wurde und dass keine Fehler aufgetreten sind
-  if(!empty($_FILES) && $_FILES['datei']['error'] === UPLOAD_ERR_OK) {
+  if(!empty($_FILES)) {
+
+    $messages = [];
+
+    switch($_FILES['datei']['error']) {
+      case UPLOAD_ERR_OK:
+        $messages[] = ['good' => 'Datei wurde erfolgreich hochgeladen'];
+        break;
+      case UPLOAD_ERR_INI_SIZE:
+        $messages[] = ['bad' => 'Die Date überschreitet die maximal erlaubte Größe von: ' . ini_get('upload_max_filesize')];
+        break;
+      case UPLOAD_ERR_FORM_SIZE:
+        $messages[] = ['bad' => 'Die Date überschreitet die maximal erlaubte Größe von: ' . $_POST['MAX_FILE_SIZE'] . 'Bytes'];
+        break;
+      case UPLOAD_ERR_NO_FILE:
+        $messages[] = ['bad' => 'Es wurde keine Datei ausgewählt'];
+        break;
+      // Weitere Fehlertypen definiert: https://www.php.net/manual/de/features.file-upload.errors.php
+      // Allerdings bringt eine Unterscheidung dem Nutzer hier nichts...
+      default:
+        $messages[] = 'Upload der Datei fehlgeschlagen.';
+        break;
+    }
+
+    if(!empty($messages)): ?>
+      <ul>
+        <?php foreach($messages as $msgs): ?>
+          <?php foreach($msgs as $class => $msg): ?>
+            <li class="<?= $class ?>"><?= htmlspecialchars($msg) ?></li>
+          <?php endforeach; ?>
+        <?php endforeach; ?>
+      </ul>
+    <?php
+    endif;
+    
     $type = mime_content_type($_FILES['datei']['tmp_name']);
     $new_filename = '';
 
