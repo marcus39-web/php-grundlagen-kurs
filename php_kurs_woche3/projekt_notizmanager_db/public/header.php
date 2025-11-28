@@ -47,11 +47,11 @@ if (!empty($_SESSION['user'])) {
   <!-- Notiz: Einbindung des Stylesheets -->
 </head>
 <body>
-  <?php include_once 'nav.php' ?>
-  <!-- Notiz: Einbindung der Navigation -->
   <header>
     <div class="container">
       <h1>Notiz-Manager DB</h1>
       <!-- Notiz: Hauptüberschrift -->
+      <?php include_once 'nav.php' ?>
+      <!-- Navigation direkt im Header platziert -->
     </div>
   </header>

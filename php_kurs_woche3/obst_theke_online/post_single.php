@@ -27,27 +27,42 @@ if (!$post) {
     exit;
 }
 
-// Bild-Upload verarbeiten
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['post_image'])) {
-    $uploadDir = __DIR__ . '/images/';
-    $fileName = basename($_FILES['post_image']['name']);
-    $targetFile = $uploadDir . $fileName;
-    $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
-    $allowedTypes = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
-    if (in_array($fileType, $allowedTypes) && $_FILES['post_image']['size'] < 2*1024*1024) {
-        if (move_uploaded_file($_FILES['post_image']['tmp_name'], $targetFile)) {
-            // In DB speichern
-            $sql = 'UPDATE tbl_posts SET posts_image = ? WHERE posts_id = ?';
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute([$fileName, $postId]);
-            // Seite neu laden, damit Bild angezeigt wird
-            header('Location: post_single.php?post=' . $postId);
-            exit;
-        } else {
-            $uploadError = 'Fehler beim Hochladen.';
+// Bild-Upload und Bild-Löschen verarbeiten
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Bild löschen
+    if (isset($_POST['delete_image']) && !empty($post['posts_image'])) {
+        $imgPath = __DIR__ . '/images/' . $post['posts_image'];
+        if (file_exists($imgPath)) {
+            unlink($imgPath);
         }
-    } else {
-        $uploadError = 'Ungültiger Dateityp oder Datei zu groß.';
+        $sql = 'UPDATE tbl_posts SET posts_image = NULL WHERE posts_id = ?';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$postId]);
+        header('Location: post_single.php?post=' . $postId);
+        exit;
+    }
+    // Bild hochladen
+    if (isset($_FILES['post_image'])) {
+        $uploadDir = __DIR__ . '/images/';
+        $fileName = basename($_FILES['post_image']['name']);
+        $targetFile = $uploadDir . $fileName;
+        $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+        $allowedTypes = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
+        if (in_array($fileType, $allowedTypes) && $_FILES['post_image']['size'] < 2*1024*1024) {
+            if (move_uploaded_file($_FILES['post_image']['tmp_name'], $targetFile)) {
+                // In DB speichern
+                $sql = 'UPDATE tbl_posts SET posts_image = ? WHERE posts_id = ?';
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute([$fileName, $postId]);
+                // Seite neu laden, damit Bild angezeigt wird
+                header('Location: post_single.php?post=' . $postId);
+                exit;
+            } else {
+                $uploadError = 'Fehler beim Hochladen.';
+            }
+        } else {
+            $uploadError = 'Ungültiger Dateityp oder Datei zu groß.';
+        }
     }
 }
 ?>
@@ -56,34 +71,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['post_image'])) {
 <head>
     <meta charset="UTF-8">
     <title><?= htmlspecialchars($post['posts_header']) ?> - Artikelansicht</title>
-    <link rel="stylesheet" href="css/tailwind.css">
+    <!-- Tailwind entfernt, nur steyes.css und background.css -->
 </head>
 <body>
     <?php require_once __DIR__ . '/inc/header.inc.php'; ?>
     <?php require_once __DIR__ . '/inc/nav.inc.php'; ?>
-    <main>
-        <header>
-            <h2><?= htmlspecialchars($post['posts_header']) ?></h2>
-            <ul>
-                <li>Autor: <?= htmlspecialchars($post['users_forename'] . ' ' . $post['users_lastname']) ?></li>
-                <li>Kategorie: <?= htmlspecialchars($post['categ_name'] ?? 'Keine Kategorie') ?></li>
-                <li>Erstellt: <?= htmlspecialchars($post['posts_created_at']) ?></li>
-                <li>Geändert: <?= htmlspecialchars($post['posts_updated_at']) ?></li>
+    <main class="container">
+        <section class="card" style="max-width:600px; margin:32px auto;">
+            <h2 style="text-align:center; margin-bottom:18px;"><?= htmlspecialchars($post['posts_header']) ?></h2>
+            <ul style="margin-bottom:18px;">
+                <li><strong>Autor:</strong> <?= htmlspecialchars($post['posts_autor'] ?? 'Unbekannt') ?></li>
+                <li><strong>Kategorie:</strong> <?= htmlspecialchars($post['categ_name'] ?? $post['posts_kategorie'] ?? 'Keine Kategorie') ?></li>
+                <li><strong>Erstellt:</strong> <?= htmlspecialchars($post['posts_created'] ?? '') ?></li>
+                <li><strong>Geändert:</strong> <?= htmlspecialchars($post['posts_changed'] ?? '') ?></li>
             </ul>
-        </header>
-        <section>
             <?php if (!empty($post['posts_image'])): ?>
-                <img src="images/<?= htmlspecialchars($post['posts_image']) ?>" alt="Artikelbild" style="max-width:400px;">
+                <img src="images/<?= htmlspecialchars($post['posts_image']) ?>" alt="Artikelbild" style="max-width:400px; display:block; margin:0 auto 18px; border-radius:10px;">
+                <form method="post" style="text-align:center; margin-bottom:18px;">
+                    <input type="hidden" name="delete_image" value="1">
+                    <button type="submit" class="button" style="background:var(--danger); color:#fff;">Bild löschen</button>
+                </form>
             <?php endif; ?>
-            <p><?= nl2br(htmlspecialchars($post['posts_content'])) ?></p>
+            <div style="margin-bottom:18px;">
+                <?= nl2br(htmlspecialchars($post['posts_content'])) ?>
+            </div>
             <hr>
-            <button onclick="document.getElementById('uploadForm').style.display='block'">Bild hochladen</button>
+            <div style="text-align:center; margin-top:18px;">
+                <button class="button" onclick="document.getElementById('uploadForm').style.display='block'">Bild hochladen</button>
+            </div>
             <form id="uploadForm" method="post" enctype="multipart/form-data" style="display:none;margin-top:10px;">
                 <input type="file" name="post_image" accept="image/*" required>
-                <button type="submit">Hochladen</button>
+                <button type="submit" class="button">Hochladen</button>
             </form>
             <?php if (!empty($uploadError)): ?>
-                <p style="color:red;"><?= htmlspecialchars($uploadError) ?></p>
+                <p class="alert text-danger" style="text-align:center; margin-top:12px;"><?= htmlspecialchars($uploadError) ?></p>
             <?php endif; ?>
         </section>
     </main>
