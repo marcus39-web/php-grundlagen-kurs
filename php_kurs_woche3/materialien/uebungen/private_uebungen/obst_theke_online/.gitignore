@@ -1,0 +1,25 @@
+# .gitignore für obst_theke_online
+# Verzeichnisse und Dateien, die nicht ins Git-Repo sollen
+
+# Sensible Daten
+.env
+*.env
+
+# Upload-Verzeichnisse
+images/
+uploads/
+
+# Systemdateien
+.DS_Store
+Thumbs.db
+
+# PHP-Cache
+*.log
+*.cache
+
+# Composer
+/vendor/
+
+# Sonstiges
+.idea/
+.vscode/
